@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://solvenciaindustries.com/sitemap.xml
+
+# Disallow specific paths
+Disallow: /admin/
+Disallow: /private/
+Disallow: /tmp/
+Disallow: /*.json$
