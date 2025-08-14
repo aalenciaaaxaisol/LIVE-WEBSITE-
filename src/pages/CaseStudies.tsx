@@ -313,7 +313,7 @@ const CaseStudies: React.FC = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-royal-500 to-royal-700 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]">Chronicles of Success</h1>
-            <p className="text-xl text-white mb-10 font-semibold [text-shadow:_0_1px_2px_rgba(0,0,0,0.8)]">
+            <p class="text-xl text-gray-700 mb-10">
               In-depth narratives of our premium AI solutions, illustrating how we craft excellence and drive unparalleled results.
             </p>
             <Button to="/contact" size="lg">
