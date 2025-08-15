@@ -58,21 +58,38 @@ const Contact: React.FC = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitMessage(null);
-    
-    try {
-      // Simulate form submission for demo purposes
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      console.log('Form submitted:', formData);
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSubmitting(true);
+  setSubmitMessage(null);
+
+  try {
+    console.log('Form submitted:', formData);
+
+    // Insert into Supabase
+    const { data, error } = await supabase
+      .from('contacts')
+      .insert([{
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        message: formData.message,
+        services: formData.services // array from checkboxes
+      }]);
+
+    if (error) {
+      console.error('Supabase insert error:', error);
+      setSubmitMessage({
+        type: 'error',
+        text: 'There was an error submitting your form.'
+      });
+    } else {
       setSubmitMessage({
         type: 'success',
-        text: 'Message received! Our automation elves are on it. We\'ll connect with you in no time...'
+        text: 'Message received! Our automation elves are on it.'
       });
-      
+
       // Reset form
       setFormData({
         name: '',
@@ -82,16 +99,17 @@ const Contact: React.FC = () => {
         message: '',
         services: []
       });
-    } catch (error) {
-      console.error('Exception when submitting form:', error);
-      setSubmitMessage({
-        type: 'error',
-        text: 'There was an error submitting your message. Please try again.'
-      });
-    } finally {
-      setIsSubmitting(false);
     }
-  };
+  } catch (err) {
+    console.error('Unexpected error:', err);
+    setSubmitMessage({
+      type: 'error',
+      text: 'There was an error submitting your form.'
+    });
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   const contactSchemaData = {
     "@context": "https://schema.org",
