@@ -39,9 +39,3 @@ Disallow: /api/
 
 # Sitemap location
 Sitemap: https://solvenciaindustries.com/sitemap.xml
-
-# Crawl-delay for respectful crawling
-Crawl-delay: 0
-
-# Cache directive
-Cache-delay: 0
