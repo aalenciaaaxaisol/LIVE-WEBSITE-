@@ -27,28 +27,8 @@ const Home: React.FC = () => {
   const servicesAnimation = useAnimation();
   const testimonialsAnimation = useAnimation();
 
-  // TypeWriter effect
-  const [typedText, setTypedText] = React.useState("");
-  const fullText = "Empowering Business Growth with Intelligent AI Solutions";
-  
-  useEffect(() => {
-    if (prefersReducedMotion) {
-      setTypedText(fullText);
-      return;
-    }
-    
-    let currentIndex = 0;
-    const interval = setInterval(() => {
-      if (currentIndex <= fullText.length) {
-        setTypedText(fullText.substring(0, currentIndex));
-        currentIndex++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 45);
-    
-    return () => clearInterval(interval);
-  }, []);
+  // Static text instead of typewriter effect
+  const titleText = "Empowering Business Growth with Intelligent AI Solutions";
   
   // Trigger animations based on scroll position
   useEffect(() => {
@@ -180,7 +160,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative" id="main-content">
       <SEOHead
         title="SolvenciaxAI - AI-Powered Business Solutions | Automation & Growth"
         description="Transform your business with Solvencia Industries' cutting-edge AI solutions. Expert automation, customer support, CRM optimization, and custom AI development for exponential growth."
@@ -201,16 +181,15 @@ const Home: React.FC = () => {
               className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-royal-500 to-royal-700 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.5 }}
             >
-              {typedText}
-              <span className="inline-block animate-pulse">|</span>
+              {titleText}
             </motion.h1>
             <motion.p 
               className="text-xl text-gray-700 mb-10"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
+              transition={{ duration: 0.3, delay: 0.2 }}
             >
               Discover cutting-edge innovations tailored to transform your business processes and accelerate success.
             </motion.p>
@@ -218,9 +197,9 @@ const Home: React.FC = () => {
               className="flex flex-col sm:flex-row justify-center gap-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
+              transition={{ duration: 0.3, delay: 0.4 }}
             >
-              <Button to="/contact" size="lg" animate={true}>
+              <Button to="/contact" size="lg">
                 Schedule Free Consultation
               </Button>
               <Button to="/services" variant="outline" size="lg">
@@ -262,7 +241,7 @@ const Home: React.FC = () => {
             className="text-center mt-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.5 }}
+            transition={{ delay: 0.4, duration: 0.3 }}
           >
             <Button to="/services">
               View All Services <ArrowRight size={16} className="ml-2" />
@@ -272,21 +251,18 @@ const Home: React.FC = () => {
       </SectionFadeIn>
 
       {/* Testimonials */}
-      <SectionFadeIn className="py-16 bg-white/80 backdrop-blur-sm" ref={testimonialsRef}>
+      <section className="py-16 bg-white/80 backdrop-blur-sm" ref={testimonialsRef}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading 
             title="What Our Clients Say" 
             subtitle="Don't just take our word for it. Hear from businesses that have transformed their operations with our AI solutions."
             center
           />
-          <motion.div 
+          <div 
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            variants={staggerContainer}
-            initial="hidden"
-            animate={testimonialsAnimation}
           >
             {testimonials.map((testimonial, index) => (
-              <motion.div key={index} variants={fadeInUp} custom={index}>
+              <div key={index} className="opacity-100">
                 <TestimonialCard 
                   quote={testimonial.quote}
                   name={testimonial.name}
@@ -294,11 +270,11 @@ const Home: React.FC = () => {
                   company={testimonial.company}
                   image={testimonial.image}
                 />
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
-      </SectionFadeIn>
+      </section>
 
       {/* CTA Section */}
       <motion.section 
@@ -307,7 +283,7 @@ const Home: React.FC = () => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.3 }}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
@@ -316,7 +292,7 @@ const Home: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.3 }}
             >
               Ready to Transform Your Business with AI?
             </motion.h2>
@@ -325,7 +301,7 @@ const Home: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
             >
               Take the first step toward a more efficient, data-driven future for your organization.
             </motion.p>
@@ -334,9 +310,9 @@ const Home: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 }}
+              transition={{ duration: 0.3, delay: 0.2 }}
             >
-              <Button to="/contact" size="lg" animate={true}>
+              <Button to="/contact" size="lg">
                 Schedule Free Consultation
               </Button>
               <Button to="/case-studies" variant="outline" size="lg">

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, BrainCircuit } from 'lucide-react';
+import { Menu, X, BrainCircuit, Home, Briefcase, FolderOpen, FileText, BookOpen, User, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showSitemap, setShowSitemap] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
@@ -21,25 +22,30 @@ const Header: React.FC = () => {
     setIsOpen(!isOpen);
   };
 
+  const toggleSitemap = () => {
+    setShowSitemap(!showSitemap);
+  };
+
   const closeMenu = () => {
     setIsOpen(false);
+    setShowSitemap(false);
   };
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Services', path: '/services' },
-    { name: 'Portfolio', path: '/portfolio' },
-    { name: 'Case Studies', path: '/case-studies' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'About', path: '/about' },
-    { name: 'Contact', path: '/contact' },
+    { name: 'Home', path: '/', icon: Home },
+    { name: 'Services', path: '/services', icon: Briefcase },
+    { name: 'Portfolio', path: '/portfolio', icon: FolderOpen },
+    { name: 'Case Studies', path: '/case-studies', icon: FileText },
+    { name: 'Blog', path: '/blog', icon: BookOpen },
+    { name: 'About', path: '/about', icon: User },
+    { name: 'Contact', path: '/contact', icon: Phone },
   ];
 
   // Animation variants
   const logoVariants = {
     initial: { opacity: 0, x: -20 },
-    animate: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } },
-    hover: { scale: 1.05, transition: { duration: 0.2 } }
+    animate: { opacity: 1, x: 0, transition: { duration: 0.3, ease: "easeOut" } },
+    hover: { scale: 1.02, transition: { duration: 0.2 } }
   };
 
   const navItemVariants = {
@@ -48,14 +54,14 @@ const Header: React.FC = () => {
       opacity: 1, 
       y: 0, 
       transition: { 
-        duration: 0.3, 
+        duration: 0.25, 
         delay: 0.1 + (i * 0.05), 
         ease: "easeOut" 
       } 
     }),
     hover: { 
       color: "#4169E1", 
-      scale: 1.05, 
+      scale: 1.02, 
       transition: { duration: 0.2 } 
     }
   };
@@ -66,7 +72,7 @@ const Header: React.FC = () => {
       opacity: 1, 
       height: 'auto',
       transition: { 
-        duration: 0.3,
+        duration: 0.25,
         staggerChildren: 0.05,
         delayChildren: 0.1
       }
@@ -75,7 +81,7 @@ const Header: React.FC = () => {
       opacity: 0, 
       height: 0,
       transition: { 
-        duration: 0.3,
+        duration: 0.25,
         staggerChildren: 0.05,
         staggerDirection: -1
       }
@@ -89,13 +95,19 @@ const Header: React.FC = () => {
   };
 
   return (
+    <>
+      {/* Skip to main content link for accessibility */}
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
+      
     <motion.header
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled ? 'bg-white/80 backdrop-blur-sm shadow-md py-2' : 'bg-transparent py-4'
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
     >
       <div className="container mx-auto px-1 sm:px-2 lg:px-2">
         <div className="flex items-center justify-between">
@@ -109,7 +121,7 @@ const Header: React.FC = () => {
             <Link to="/" className="flex items-center" onClick={closeMenu}>
               <div className="flex items-center space-x-1 group">
                 <motion.div
-                  whileHover={{ rotate: 10, scale: 1.1 }}
+                  whileHover={{ rotate: 5, scale: 1.05 }}
                   transition={{ duration: 0.2 }}
                 >
                   <BrainCircuit size={24} className="text-royal-500 group-hover:text-royal-400 transition-all duration-300 filter drop-shadow-[0_0_5px_rgba(65,105,225,0.5)]" />
@@ -126,7 +138,7 @@ const Header: React.FC = () => {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center ml-[25px] whitespace-nowrap">
+          <nav className="hidden md:flex items-center ml-[25px] whitespace-nowrap" role="navigation" aria-label="Main navigation">
             {navLinks.map((link, i) => (
               <motion.div
                 key={link.name}
@@ -145,11 +157,26 @@ const Header: React.FC = () => {
                       ? 'text-gray-800'
                       : 'text-gray-800'
                   }`}
+                  aria-current={location.pathname === link.path ? 'page' : undefined}
                 >
                   {link.name}
                 </Link>
               </motion.div>
             ))}
+            
+            {/* Sitemap Toggle Button */}
+            <motion.button
+              onClick={toggleSitemap}
+              className="text-gray-800 hover:text-royal-500 focus:outline-none ml-4 p-2 rounded-md"
+              aria-label="Toggle sitemap"
+              aria-expanded={showSitemap}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </motion.button>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -157,12 +184,13 @@ const Header: React.FC = () => {
             className="md:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.3 }}
           >
             <motion.button
               onClick={toggleMenu}
               className="text-gray-800 hover:text-royal-500 focus:outline-none"
               aria-label="Toggle menu"
+              aria-expanded={isOpen}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -181,6 +209,8 @@ const Header: React.FC = () => {
             initial="hidden"
             animate="visible"
             exit="exit"
+            role="navigation"
+            aria-label="Mobile navigation"
           >
             <div className="px-4 pt-2 pb-4 space-y-1">
               {navLinks.map((link) => (
@@ -198,8 +228,12 @@ const Header: React.FC = () => {
                         : 'text-gray-800 hover:bg-royal-50 hover:text-royal-500'
                     }`}
                     onClick={closeMenu}
+                    aria-current={location.pathname === link.path ? 'page' : undefined}
                   >
+                    <div className="flex items-center">
+                      <link.icon size={18} className="mr-2" />
                     {link.name}
+                    </div>
                   </Link>
                 </motion.div>
               ))}
@@ -207,7 +241,45 @@ const Header: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      
+      {/* Desktop Sitemap Dropdown */}
+      <AnimatePresence>
+        {showSitemap && (
+          <motion.div 
+            className="hidden md:block fixed top-20 right-4 bg-white/95 backdrop-blur-sm shadow-lg rounded-lg border border-gray-200 z-40 min-w-[250px]"
+            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            role="navigation"
+            aria-label="Site map"
+          >
+            <div className="p-4">
+              <h3 className="text-lg font-semibold text-gray-900 mb-3">Site Map</h3>
+              <div className="space-y-2">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    className={`flex items-center py-2 px-3 text-sm rounded-md transition-colors ${
+                      location.pathname === link.path
+                        ? 'bg-royal-50 text-royal-600'
+                        : 'text-gray-700 hover:bg-gray-50 hover:text-royal-600'
+                    }`}
+                    onClick={closeMenu}
+                    aria-current={location.pathname === link.path ? 'page' : undefined}
+                  >
+                    <link.icon size={16} className="mr-2" />
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.header>
+    </>
   );
 };
 
