@@ -1,11 +1,10 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
 import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { pageTransition } from './lib/animations';
-import AnimatedBg from './components/AnimatedBg';
+import LiquidGlassBackground from './components/AnimatedBg';
+import ThemeToggle from './components/ThemeToggle';
 import ScrollToTop from './components/ScrollToTop';
 import ErrorBoundary from './components/ErrorBoundary';
 
@@ -20,8 +19,8 @@ const Contact = lazy(() => import('./pages/Contact'));
 
 // Loading component
 const PageLoader = () => (
-  <div className="flex items-center justify-center min-h-screen">
-    <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-royal-500"></div>
+  <div className="flex items-center justify-center min-h-screen bg-[var(--bg-primary)]">
+    <div className="loading-shimmer w-32 h-32 rounded-full border-2 border-[var(--glass-border)]"></div>
   </div>
 );
 
@@ -30,15 +29,7 @@ const AnimatedRoutes = () => {
   const location = useLocation();
   
   return (
-    <AnimatePresence mode="wait">
-      <motion.main
-        key={location.pathname}
-        className="flex-grow relative z-10"
-        initial="initial"
-        animate="animate"
-        exit="exit"
-        variants={pageTransition}
-      >
+    <main className="flex-grow relative z-10">
         <Suspense fallback={<PageLoader />}>
           <Routes location={location}>
             <Route path="/" element={<Home />} />
@@ -50,8 +41,7 @@ const AnimatedRoutes = () => {
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </Suspense>
-      </motion.main>
-    </AnimatePresence>
+    </main>
   );
 };
 
@@ -62,7 +52,8 @@ function App() {
         <Router>
           <ScrollToTop />
           <div className="flex flex-col min-h-screen relative">
-            <AnimatedBg />
+            <LiquidGlassBackground />
+            <ThemeToggle />
             <div className="relative z-10">
               <Header />
               <AnimatedRoutes />

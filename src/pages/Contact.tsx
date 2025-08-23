@@ -164,47 +164,48 @@ const handleSubmit = async (e: React.FormEvent) => {
       </section>
 
       {/* Contact Form and Info */}
-      <section className="py-16 bg-royal-50/80 backdrop-blur-sm">
+      <section className="py-20 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--bg-secondary)] to-transparent opacity-30" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-6xl mx-auto relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
               {/* Contact Information */}
               <div className="lg:col-span-1">
-                <div className="bg-white/90 p-8 rounded-xl shadow-metallic h-full">
-                  <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
+                <div className="glass-panel p-8 h-full">
+                  <h2 className="text-2xl font-bold mb-6 holographic">Contact Information</h2>
                   <div className="space-y-6">
                     <div className="flex items-start">
                       <div className="flex-shrink-0 mt-1">
-                        <Mail className="text-royal-500" size={20} />
+                        <Mail className="text-[var(--neon-blue)]" size={20} />
                       </div>
                       <div className="ml-4">
-                        <h3 className="font-semibold">Email Address</h3>
-                        <p className="text-gray-600">Company Email :- alliance@solvenciaindustries.com<br />
+                        <h3 className="font-semibold text-[var(--text-primary)]">Email Address</h3>
+                        <p className="text-[var(--text-secondary)]">Company Email :- alliance@solvenciaindustries.com<br />
 Owner's Email :- ashunuke@gmail.com</p>
                       </div>
                     </div>
                     <div className="flex items-start">
                       <div className="flex-shrink-0 mt-1">
-                        <Phone className="text-royal-500" size={20} />
+                        <Phone className="text-[var(--neon-blue)]" size={20} />
                       </div>
                       <div className="ml-4">
-                        <h3 className="font-semibold">Phone Number</h3>
-                        <p className="text-gray-600">+918149108744</p>
+                        <h3 className="font-semibold text-[var(--text-primary)]">Phone Number</h3>
+                        <p className="text-[var(--text-secondary)]">+918149108744</p>
                       </div>
                     </div>
                     <div className="flex items-start">
                       <div className="flex-shrink-0 mt-1">
-                        <Clock className="text-royal-500" size={20} />
+                        <Clock className="text-[var(--neon-blue)]" size={20} />
                       </div>
                       <div className="ml-4">
-                        <h3 className="font-semibold">Working Hours</h3>
-                        <p className="text-gray-600">24/7 Always On Always Ready No rest Only Automation</p>
+                        <h3 className="font-semibold text-[var(--text-primary)]">Working Hours</h3>
+                        <p className="text-[var(--text-secondary)]">24/7 Always On Always Ready No rest Only Automation</p>
                       </div>
                     </div>
                   </div>
                   
-                  <div className="mt-8 pt-8 border-t border-gray-200">
-                    <h3 className="font-semibold mb-4">Connect With Us</h3>
+                  <div className="mt-8 pt-8 border-t border-[var(--glass-border)]">
+                    <h3 className="font-semibold mb-4 text-[var(--text-primary)]">Connect With Us</h3>
                     <div className="flex space-x-4">
                       {[
                         { name: 'linkedin', url: 'https://www.linkedin.com/in/ashish-yadav-0b839b342/' },
@@ -217,10 +218,10 @@ Owner's Email :- ashunuke@gmail.com</p>
                           href={social.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-10 h-10 bg-royal-100 rounded-full flex items-center justify-center text-royal-500 hover:bg-royal-500 hover:text-white transition-colors"
+                          className="glass-button w-10 h-10 rounded-full flex items-center justify-center neon-glow"
                         >
                           <span className="sr-only">{social.name}</span>
-                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-5 h-5 text-[var(--text-primary)]" fill="currentColor" viewBox="0 0 24 24">
                             <path d={
                               social.name === 'linkedin' 
                                 ? 'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z'
@@ -240,13 +241,13 @@ Owner's Email :- ashunuke@gmail.com</p>
               
               {/* Contact Form */}
               <div className="lg:col-span-2">
-                <div className="bg-white/90 p-8 rounded-xl shadow-metallic">
-                  <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
+                <div className="glass-panel p-8">
+                  <h2 className="text-2xl font-bold mb-6 holographic">Send Us a Message</h2>
                   
                   <form onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                       <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor="name" className="block text-sm font-medium text-[var(--text-primary)] mb-1">
                           Full Name <span className="text-red-500">*</span>
                         </label>
                         <input
@@ -256,11 +257,11 @@ Owner's Email :- ashunuke@gmail.com</p>
                           value={formData.name}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+                          className="glass-input"
                         />
                       </div>
                       <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor="email" className="block text-sm font-medium text-[var(--text-primary)] mb-1">
                           Email Address <span className="text-red-500">*</span>
                         </label>
                         <input
@@ -270,11 +271,11 @@ Owner's Email :- ashunuke@gmail.com</p>
                           value={formData.email}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+                          className="glass-input"
                         />
                       </div>
                       <div>
-                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor="phone" className="block text-sm font-medium text-[var(--text-primary)] mb-1">
                           Phone Number
                         </label>
                         <input
@@ -283,11 +284,11 @@ Owner's Email :- ashunuke@gmail.com</p>
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+                          className="glass-input"
                         />
                       </div>
                       <div>
-                        <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor="company" className="block text-sm font-medium text-[var(--text-primary)] mb-1">
                           Company Name
                         </label>
                         <input
@@ -296,28 +297,28 @@ Owner's Email :- ashunuke@gmail.com</p>
                           name="company"
                           value={formData.company}
                           onChange={handleChange}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+                          className="glass-input"
                         />
                       </div>
                       <div className="sm:col-span-2">
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-medium text-[var(--text-primary)] mb-1">
                           Services of Interest
                         </label>
                         <div className="mb-3 flex flex-wrap gap-2">
                           {formData.services.map(service => (
-                            <div key={service} className="bg-royal-100 text-royal-800 px-3 py-1 rounded-full text-sm flex items-center">
+                            <div key={service} className="glass-button px-3 py-1 text-sm flex items-center">
                               {service}
                               <button 
                                 type="button" 
                                 onClick={() => removeService(service)}
                                 className="ml-1 focus:outline-none"
                               >
-                                <X size={14} className="text-royal-500" />
+                                <X size={14} className="text-[var(--neon-blue)]" />
                               </button>
                             </div>
                           ))}
                         </div>
-                        <div className="border border-gray-300 rounded-md p-3 max-h-48 overflow-y-auto">
+                        <div className="glass-panel p-4 max-h-48 overflow-y-auto">
                           {services.map((service) => (
                             <div key={service} className="mb-2 last:mb-0">
                               <label className="inline-flex items-center cursor-pointer">
@@ -325,16 +326,16 @@ Owner's Email :- ashunuke@gmail.com</p>
                                   type="checkbox"
                                   checked={formData.services.includes(service)}
                                   onChange={() => handleServiceToggle(service)}
-                                  className="form-checkbox h-5 w-5 text-royal-500 rounded border-gray-300 focus:ring-royal-500"
+                                  className="w-4 h-4 text-[var(--neon-blue)] bg-transparent border-[var(--glass-border)] rounded focus:ring-[var(--neon-blue)]"
                                 />
-                                <span className="ml-2 text-gray-700">{service}</span>
+                                <span className="ml-2 text-[var(--text-primary)]">{service}</span>
                               </label>
                             </div>
                           ))}
                         </div>
                       </div>
                       <div className="sm:col-span-2">
-                        <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor="message" className="block text-sm font-medium text-[var(--text-primary)] mb-1">
                           Your Message <span className="text-red-500">*</span>
                         </label>
                         <textarea
@@ -344,7 +345,7 @@ Owner's Email :- ashunuke@gmail.com</p>
                           onChange={handleChange}
                           required
                           rows={6}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+                          className="glass-input resize-none"
                         ></textarea>
                       </div>
                     </div>
@@ -375,7 +376,7 @@ Owner's Email :- ashunuke@gmail.com</p>
                       {/* Submission Status Messages */}
                       {submitMessage && (
                         <div className={`p-4 rounded-md ${
-                          submitMessage.type === 'success' ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'
+                          submitMessage.type === 'success' ? 'glass-panel border-green-500 text-green-400' : 'glass-panel border-red-500 text-red-400'
                         }`}>
                           {submitMessage.text}
                         </div>

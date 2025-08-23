@@ -1,41 +1,17 @@
 import React, { useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform, useAnimation, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Check, Users, BrainCircuit, LineChart, ArrowRight, Building, Award } from 'lucide-react';
 import Button from '../components/Button';
 import SectionHeading from '../components/SectionHeading';
 import ServiceCard from '../components/ServiceCard';
 import TestimonialCard from '../components/TestimonialCard';
 import StatsCard from '../components/StatsCard';
-import SectionFadeIn from '../components/SectionFadeIn';
-import AnimationWrapper from '../components/AnimationWrapper';
 import SEOHead from '../components/SEOHead';
-import { fadeIn, fadeInUp, staggerContainer, prefersReducedMotion } from '../lib/animations';
 
 const Home: React.FC = () => {
-  const heroRef = useRef(null);
-  const servicesRef = useRef(null);
-  const testimonialsRef = useRef(null);
-  const ctaRef = useRef(null);
-
-  const { scrollYProgress } = useScroll();
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0.3]);
-  const heroScale = useTransform(scrollYProgress, [0, 0.1], [1, 0.95]);
-
-  const servicesInView = useInView(servicesRef, { once: true, margin: "-100px" });
-  const testimonialsInView = useInView(testimonialsRef, { once: true, margin: "-100px" });
-
-  const servicesAnimation = useAnimation();
-  const testimonialsAnimation = useAnimation();
-
   // Static text instead of typewriter effect
   const titleText = "Empowering Business Growth with Intelligent AI Solutions";
   
-  // Trigger animations based on scroll position
-  useEffect(() => {
-    if (servicesInView) servicesAnimation.start("visible");
-    if (testimonialsInView) testimonialsAnimation.start("visible");
-  }, [servicesInView, testimonialsInView]);
-
   const services = [
     {
       icon: BrainCircuit,
@@ -170,34 +146,23 @@ const Home: React.FC = () => {
       />
 
       {/* Hero Section */}
-      <motion.section 
-        ref={heroRef}
+      <section 
         className="relative pt-32 pb-20 md:pt-40 md:pb-28"
-        style={{ opacity: heroOpacity, scale: heroScale }}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.h1 
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-royal-500 to-royal-700 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
+          <div className="max-w-5xl mx-auto text-center">
+            <h1 
+              className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-8 holographic leading-tight"
             >
               {titleText}
-            </motion.h1>
-            <motion.p 
-              className="text-xl text-gray-700 mb-10"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.2 }}
+            </h1>
+            <p 
+              className="text-xl text-[var(--text-secondary)] mb-12 max-w-3xl mx-auto leading-relaxed"
             >
               Discover cutting-edge innovations tailored to transform your business processes and accelerate success.
-            </motion.p>
-            <motion.div 
-              className="flex flex-col sm:flex-row justify-center gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.4 }}
+            </p>
+            <div 
+              className="flex flex-col sm:flex-row justify-center gap-6"
             >
               <Button to="/contact" size="lg">
                 Schedule Free Consultation
@@ -205,64 +170,62 @@ const Home: React.FC = () => {
               <Button to="/services" variant="outline" size="lg">
                 Explore Our Services
               </Button>
-            </motion.div>
+            </div>
           </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* Services Preview */}
-      <SectionFadeIn className="py-16 bg-royal-50/80 backdrop-blur-sm" ref={servicesRef}>
+      <section className="py-20 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--bg-secondary)] to-transparent opacity-50" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading 
             title="Bespoke AI Solutions" 
-            subtitle="Elevate your business with our tailored, high-end AI services designed for exceptional performance and impact."
+            subtitle="Elevate your business with our tailored, cutting-edge AI services designed for exceptional performance and transformative impact."
             center
           />
           
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            variants={staggerContainer}
-            initial="hidden"
-            animate={servicesAnimation}
+          <div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10"
           >
             {services.map((service, index) => (
-              <motion.div key={index} variants={fadeInUp}>
+              <div key={index}>
                 <ServiceCard 
                   icon={service.icon}
                   title={service.title}
                   description={service.description}
                   details={service.details}
                 />
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
           
-          <motion.div 
-            className="text-center mt-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.3 }}
+          <div 
+            className="text-center mt-16"
           >
             <Button to="/services">
               View All Services <ArrowRight size={16} className="ml-2" />
             </Button>
-          </motion.div>
+          </div>
         </div>
-      </SectionFadeIn>
+      </section>
 
       {/* Testimonials */}
-      <section className="py-16 bg-white/80 backdrop-blur-sm" ref={testimonialsRef}>
+      <section className="py-20 relative">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-r from-[var(--neon-purple)] via-transparent to-[var(--neon-blue)] opacity-5" />
+        </div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading 
             title="What Our Clients Say" 
-            subtitle="Don't just take our word for it. Hear from businesses that have transformed their operations with our AI solutions."
+            subtitle="Don't just take our word for it. Hear from visionary businesses that have transformed their operations with our cutting-edge AI solutions."
             center
           />
           <div 
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10"
           >
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="opacity-100">
+              <div key={index}>
                 <TestimonialCard 
                   quote={testimonial.quote}
                   name={testimonial.name}
@@ -277,40 +240,26 @@ const Home: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <motion.section 
-        className="py-16 bg-royal-900 text-white"
-        ref={ctaRef}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.3 }}
+      <section 
+        className="py-20 relative overflow-hidden"
       >
+        <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--bg-primary)]" />
+        <div className="absolute inset-0 bg-[var(--gradient-cosmic)] opacity-80" />
+        
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <motion.h2 
-              className="text-3xl font-bold mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3 }}
+          <div className="max-w-4xl mx-auto text-center relative z-10">
+            <h2 
+              className="text-4xl font-bold mb-8 holographic"
             >
               Ready to Transform Your Business with AI?
-            </motion.h2>
-            <motion.p 
-              className="text-xl text-royal-200 mb-10"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: 0.1 }}
+            </h2>
+            <p 
+              className="text-xl text-[var(--text-secondary)] mb-12 leading-relaxed"
             >
               Take the first step toward a more efficient, data-driven future for your organization.
-            </motion.p>
-            <motion.div 
-              className="flex flex-col sm:flex-row justify-center gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: 0.2 }}
+            </p>
+            <div 
+              className="flex flex-col sm:flex-row justify-center gap-6"
             >
               <Button to="/contact" size="lg">
                 Schedule Free Consultation
@@ -318,10 +267,10 @@ const Home: React.FC = () => {
               <Button to="/case-studies" variant="outline" size="lg">
                 Browse Case Studies
               </Button>
-            </motion.div>
+            </div>
           </div>
         </div>
-      </motion.section>
+      </section>
     </div>
   );
 };

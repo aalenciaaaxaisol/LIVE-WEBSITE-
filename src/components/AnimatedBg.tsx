@@ -1,128 +1,269 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 
-const AnimatedBg: React.FC = () => {
+interface Particle {
+  x: number;
+  y: number;
+  size: number;
+  speedX: number;
+  speedY: number;
+  color: string;
+  opacity: number;
+  life: number;
+  maxLife: number;
+}
+
+const LiquidGlassBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationFrameRef = useRef<number>();
+  const particlesRef = useRef<Particle[]>([]);
+  const mouseRef = useRef({ x: 0, y: 0 });
 
-  useEffect(() => {
+  // Performance-optimized particle system
+  const createParticle = useCallback((canvas: HTMLCanvasElement): Particle => {
+    const colors = [
+      'rgba(0, 212, 255, 0.6)',    // Neon blue
+      'rgba(138, 43, 226, 0.4)',   // Electric purple
+      'rgba(0, 255, 255, 0.3)',    // Cyan
+      'rgba(255, 0, 255, 0.3)',    // Magenta
+    ];
+
+    return {
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 3 + 1,
+      speedX: (Math.random() - 0.5) * 0.5,
+      speedY: (Math.random() - 0.5) * 0.5,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      opacity: Math.random() * 0.5 + 0.2,
+      life: 0,
+      maxLife: Math.random() * 300 + 200,
+    };
+  }, []);
+
+  // Initialize particles
+  const initParticles = useCallback((canvas: HTMLCanvasElement) => {
+    const particleCount = Math.min(50, Math.floor((canvas.width * canvas.height) / 15000));
+    particlesRef.current = [];
+    
+    for (let i = 0; i < particleCount; i++) {
+      particlesRef.current.push(createParticle(canvas));
+    }
+  }, [createParticle]);
+
+  // Update particle positions and properties
+  const updateParticles = useCallback((canvas: HTMLCanvasElement) => {
+    particlesRef.current.forEach((particle, index) => {
+      // Update position
+      particle.x += particle.speedX;
+      particle.y += particle.speedY;
+      particle.life++;
+
+      // Mouse interaction - subtle attraction
+      const dx = mouseRef.current.x - particle.x;
+      const dy = mouseRef.current.y - particle.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      
+      if (distance < 100) {
+        const force = (100 - distance) / 100 * 0.01;
+        particle.speedX += dx * force * 0.001;
+        particle.speedY += dy * force * 0.001;
+      }
+
+      // Boundary wrapping
+      if (particle.x > canvas.width) particle.x = 0;
+      else if (particle.x < 0) particle.x = canvas.width;
+      if (particle.y > canvas.height) particle.y = 0;
+      else if (particle.y < 0) particle.y = canvas.height;
+
+      // Lifecycle management
+      if (particle.life > particle.maxLife) {
+        particlesRef.current[index] = createParticle(canvas);
+      }
+
+      // Opacity pulsing
+      particle.opacity = 0.2 + Math.sin(particle.life * 0.02) * 0.3;
+    });
+  }, [createParticle]);
+
+  // Draw particles with glow effects
+  const drawParticles = useCallback((ctx: CanvasRenderingContext2D) => {
+    particlesRef.current.forEach(particle => {
+      ctx.save();
+      
+      // Create glow effect
+      ctx.shadowColor = particle.color;
+      ctx.shadowBlur = particle.size * 3;
+      
+      // Draw particle
+      ctx.globalAlpha = particle.opacity;
+      ctx.fillStyle = particle.color;
+      ctx.beginPath();
+      ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+      ctx.fill();
+      
+      ctx.restore();
+    });
+  }, []);
+
+  // Draw connections between nearby particles
+  const drawConnections = useCallback((ctx: CanvasRenderingContext2D) => {
+    const maxDistance = 120;
+    
+    for (let i = 0; i < particlesRef.current.length; i++) {
+      for (let j = i + 1; j < particlesRef.current.length; j++) {
+        const dx = particlesRef.current[i].x - particlesRef.current[j].x;
+        const dy = particlesRef.current[i].y - particlesRef.current[j].y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < maxDistance) {
+          const opacity = (1 - distance / maxDistance) * 0.2;
+          
+          ctx.save();
+          ctx.strokeStyle = `rgba(0, 212, 255, ${opacity})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(particlesRef.current[i].x, particlesRef.current[i].y);
+          ctx.lineTo(particlesRef.current[j].x, particlesRef.current[j].y);
+          ctx.stroke();
+          ctx.restore();
+        }
+      }
+    }
+  }, []);
+
+  // Main animation loop
+  const animate = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const particles: Particle[] = [];
-    const particleCount = 70; // Increased for more density
+    // Clear canvas with fade effect
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Set canvas dimensions to match window
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
+    // Update and draw particles
+    updateParticles(canvas);
+    drawConnections(ctx);
+    drawParticles(ctx);
 
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
+    animationFrameRef.current = requestAnimationFrame(animate);
+  }, [updateParticles, drawConnections, drawParticles]);
 
-    // Particle class
-    class Particle {
-      x: number;
-      y: number;
-      size: number;
-      speedX: number;
-      speedY: number;
-      color: string;
+  // Handle canvas resize
+  const handleResize = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3 + 1;
-        this.speedX = Math.random() * 2 - 1;
-        this.speedY = Math.random() * 2 - 1;
-        
-        // Royal blue palette with varying opacity
-        const blueHue = 225 + Math.random() * 15; // Range around royal blue
-        const saturation = 70 + Math.random() * 30; // Higher saturation for metallic feel
-        const lightness = 45 + Math.random() * 30; // Vary lightness for depth
-        const opacity = 0.1 + Math.random() * 0.3; // Higher opacity range
-        
-        this.color = `hsla(${blueHue}, ${saturation}%, ${lightness}%, ${opacity})`;
-      }
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
 
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    canvas.style.width = `${rect.width}px`;
+    canvas.style.height = `${rect.height}px`;
 
-        if (this.x > canvas.width) this.x = 0;
-        else if (this.x < 0) this.x = canvas.width;
-        if (this.y > canvas.height) this.y = 0;
-        else if (this.y < 0) this.y = canvas.height;
-      }
-
-      draw() {
-        if (!ctx) return;
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      ctx.scale(dpr, dpr);
     }
 
-    // Create particles
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
-    }
+    initParticles(canvas);
+  }, [initParticles]);
 
-    // Connect particles with lines if they are close enough
-    function connect() {
-      if (!ctx) return;
-      const maxDistance = 170; // Increased for more connections
-      for (let a = 0; a < particles.length; a++) {
-        for (let b = a; b < particles.length; b++) {
-          const dx = particles[a].x - particles[b].x;
-          const dy = particles[a].y - particles[b].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
+  // Handle mouse movement
+  const handleMouseMove = useCallback((event: MouseEvent) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-          if (distance < maxDistance) {
-            // Use royal blue hue for connections
-            const opacity = 0.2 * (1 - distance / maxDistance);
-            ctx.beginPath();
-            ctx.strokeStyle = `rgba(65, 105, 225, ${opacity})`;
-            ctx.lineWidth = 1;
-            ctx.moveTo(particles[a].x, particles[a].y);
-            ctx.lineTo(particles[b].x, particles[b].y);
-            ctx.stroke();
-          }
-        }
-      }
-    }
-
-    // Animation loop
-    function animate() {
-      if (!ctx) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      for (const particle of particles) {
-        particle.update();
-        particle.draw();
-      }
-
-      connect();
-      requestAnimationFrame(animate);
-    }
-
-    animate();
-
-    return () => {
-      window.removeEventListener('resize', resizeCanvas);
+    const rect = canvas.getBoundingClientRect();
+    mouseRef.current = {
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top,
     };
   }, []);
 
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    // Initialize
+    handleResize();
+    animate();
+
+    // Event listeners
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('mousemove', handleMouseMove);
+
+    // Cleanup
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [handleResize, animate, handleMouseMove]);
+
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 w-full h-full z-0 bg-gradient-to-b from-royal-50 via-royal-50 to-white"
-      style={{ width: '100%', height: '100%' }}
-    />
+    <>
+      {/* Cosmic gradient background */}
+      <div 
+        className="fixed inset-0 z-[-2]"
+        style={{
+          background: `
+            radial-gradient(circle at 20% 80%, rgba(138, 43, 226, 0.3) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.3) 0%, transparent 50%),
+            radial-gradient(circle at 40% 40%, rgba(0, 255, 255, 0.2) 0%, transparent 50%),
+            linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%)
+          `
+        }}
+      />
+      
+      {/* Particle canvas */}
+      <canvas
+        ref={canvasRef}
+        className="fixed inset-0 z-[-1] pointer-events-none"
+        style={{
+          width: '100%',
+          height: '100%',
+          opacity: 0.8,
+        }}
+      />
+      
+      {/* Floating orbs for additional depth */}
+      <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
+        <div 
+          className="absolute w-96 h-96 rounded-full opacity-20 animate-pulse"
+          style={{
+            background: 'radial-gradient(circle, rgba(0, 212, 255, 0.4) 0%, transparent 70%)',
+            top: '10%',
+            left: '10%',
+            animation: 'float 8s ease-in-out infinite',
+          }}
+        />
+        <div 
+          className="absolute w-64 h-64 rounded-full opacity-15 animate-pulse"
+          style={{
+            background: 'radial-gradient(circle, rgba(138, 43, 226, 0.4) 0%, transparent 70%)',
+            top: '60%',
+            right: '15%',
+            animation: 'float 6s ease-in-out infinite reverse',
+          }}
+        />
+        <div 
+          className="absolute w-48 h-48 rounded-full opacity-10 animate-pulse"
+          style={{
+            background: 'radial-gradient(circle, rgba(0, 255, 255, 0.4) 0%, transparent 70%)',
+            bottom: '20%',
+            left: '30%',
+            animation: 'float 10s ease-in-out infinite',
+          }}
+        />
+      </div>
+    </>
   );
 };
 
-export default AnimatedBg;
+export default LiquidGlassBackground;

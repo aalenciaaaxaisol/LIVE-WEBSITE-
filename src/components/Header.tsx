@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, BrainCircuit, Home, Briefcase, FolderOpen, FileText, BookOpen, User, Phone } from 'lucide-react';
+import { Menu, X, BrainCircuit, Home, Briefcase, FolderOpen, FileText, BookOpen, User, Phone, Zap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Header: React.FC = () => {
@@ -101,33 +101,28 @@ const Header: React.FC = () => {
         Skip to main content
       </a>
       
-    <motion.header
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/80 backdrop-blur-sm shadow-md py-2' : 'bg-transparent py-4'
-      }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
-    >
-      <div className="container mx-auto px-1 sm:px-2 lg:px-2">
+      <motion.header
+        className={`fixed w-full z-50 transition-all duration-500 ${
+          scrolled ? 'nav-glass py-2' : 'bg-transparent py-4'
+        }`}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+      >
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <motion.div
-            variants={logoVariants}
-            initial="initial"
-            animate="animate"
-            whileHover="hover"
-          >
+          <motion.div className="neon-glow">
             <Link to="/" className="flex items-center" onClick={closeMenu}>
               <div className="flex items-center space-x-1 group">
                 <motion.div
-                  whileHover={{ rotate: 5, scale: 1.05 }}
-                  transition={{ duration: 0.2 }}
+                  whileHover={{ rotate: 15, scale: 1.1 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  <BrainCircuit size={24} className="text-royal-500 group-hover:text-royal-400 transition-all duration-300 filter drop-shadow-[0_0_5px_rgba(65,105,225,0.5)]" />
+                  <Zap size={28} className="text-[var(--neon-blue)] drop-shadow-[0_0_10px_rgba(0,212,255,0.8)]" />
                 </motion.div>
                 <motion.span 
-                  className="text-xl font-bold bg-gradient-to-r from-royal-500 to-royal-700 bg-clip-text text-transparent filter drop-shadow-[0_0_5px_rgba(65,105,225,0.3)] transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(65,105,225,0.6)] whitespace-nowrap"
+                  className="text-xl font-bold holographic whitespace-nowrap"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.2 }}
                 >
@@ -138,7 +133,7 @@ const Header: React.FC = () => {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center ml-[25px] whitespace-nowrap" role="navigation" aria-label="Main navigation">
+          <nav className="hidden md:flex items-center space-x-8" role="navigation" aria-label="Main navigation">
             {navLinks.map((link, i) => (
               <motion.div
                 key={link.name}
@@ -150,12 +145,10 @@ const Header: React.FC = () => {
               >
                 <Link
                   to={link.path}
-                  className={`text-base font-medium tracking-wide transition-colors hover:text-royal-500 mr-6 ${
+                  className={`glass-button text-sm font-medium transition-all duration-300 ${
                     location.pathname === link.path
-                      ? 'text-royal-500'
-                      : scrolled
-                      ? 'text-gray-800'
-                      : 'text-gray-800'
+                      ? 'border-[var(--neon-blue)] text-[var(--neon-blue)] shadow-[0_0_20px_rgba(0,212,255,0.3)]'
+                      : 'hover:border-[var(--neon-blue)] hover:text-[var(--neon-blue)]'
                   }`}
                   aria-current={location.pathname === link.path ? 'page' : undefined}
                 >
@@ -167,13 +160,13 @@ const Header: React.FC = () => {
             {/* Sitemap Toggle Button */}
             <motion.button
               onClick={toggleSitemap}
-              className="text-gray-800 hover:text-royal-500 focus:outline-none ml-4 p-2 rounded-md"
+              className="glass-button neon-glow p-2"
               aria-label="Toggle sitemap"
               aria-expanded={showSitemap}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-[var(--text-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </motion.button>
@@ -188,13 +181,13 @@ const Header: React.FC = () => {
           >
             <motion.button
               onClick={toggleMenu}
-              className="text-gray-800 hover:text-royal-500 focus:outline-none"
+              className="glass-button neon-glow p-2"
               aria-label="Toggle menu"
               aria-expanded={isOpen}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              {isOpen ? <X size={24} className="text-[var(--text-primary)]" /> : <Menu size={24} className="text-[var(--text-primary)]" />}
             </motion.button>
           </motion.div>
         </div>
@@ -204,7 +197,7 @@ const Header: React.FC = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div 
-            className="md:hidden bg-white/90 backdrop-blur-sm shadow-lg absolute top-full left-0 right-0 overflow-hidden"
+            className="md:hidden glass-panel absolute top-full left-0 right-0 m-4 overflow-hidden"
             variants={mobileMenuVariants}
             initial="hidden"
             animate="visible"
@@ -222,10 +215,10 @@ const Header: React.FC = () => {
                 >
                   <Link
                     to={link.path}
-                    className={`block py-2 px-3 text-base font-medium rounded-md ${
+                    className={`glass-button w-full justify-start ${
                       location.pathname === link.path
-                        ? 'bg-royal-50 text-royal-500'
-                        : 'text-gray-800 hover:bg-royal-50 hover:text-royal-500'
+                        ? 'border-[var(--neon-blue)] text-[var(--neon-blue)]'
+                        : 'hover:border-[var(--neon-blue)] hover:text-[var(--neon-blue)]'
                     }`}
                     onClick={closeMenu}
                     aria-current={location.pathname === link.path ? 'page' : undefined}
@@ -246,7 +239,7 @@ const Header: React.FC = () => {
       <AnimatePresence>
         {showSitemap && (
           <motion.div 
-            className="hidden md:block fixed top-20 right-4 bg-white/95 backdrop-blur-sm shadow-lg rounded-lg border border-gray-200 z-40 min-w-[250px]"
+            className="hidden md:block fixed top-20 right-4 glass-panel z-40 min-w-[250px]"
             initial={{ opacity: 0, y: -10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
@@ -255,16 +248,16 @@ const Header: React.FC = () => {
             aria-label="Site map"
           >
             <div className="p-4">
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">Site Map</h3>
+              <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-3 holographic">Site Map</h3>
               <div className="space-y-2">
                 {navLinks.map((link) => (
                   <Link
                     key={link.name}
                     to={link.path}
-                    className={`flex items-center py-2 px-3 text-sm rounded-md transition-colors ${
+                    className={`glass-button text-sm w-full justify-start ${
                       location.pathname === link.path
-                        ? 'bg-royal-50 text-royal-600'
-                        : 'text-gray-700 hover:bg-gray-50 hover:text-royal-600'
+                        ? 'border-[var(--neon-blue)] text-[var(--neon-blue)]'
+                        : 'hover:border-[var(--neon-blue)] hover:text-[var(--neon-blue)]'
                     }`}
                     onClick={closeMenu}
                     aria-current={location.pathname === link.path ? 'page' : undefined}

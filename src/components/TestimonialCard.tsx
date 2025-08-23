@@ -1,5 +1,5 @@
 import React from 'react';
-import { Quote } from 'lucide-react';
+import { Quote, Star } from 'lucide-react';
 
 interface TestimonialCardProps {
   quote: string;
@@ -17,26 +17,41 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   image,
 }) => {
   return (
-    <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-metallic p-6 border border-royal-100 transition-all duration-300 hover:shadow-lg hover:border-royal-200">
-      <div className="inline-block mb-4">
-        <Quote size={32} className="text-royal-200" />
+    <div className="testimonial-card p-6 h-full flex flex-col">
+      <div className="flex items-center justify-between mb-4">
+        <Quote size={28} className="text-[var(--neon-purple)] opacity-60" />
+        <div className="flex space-x-1">
+          {[...Array(5)].map((_, i) => (
+            <Star key={i} size={16} className="text-[var(--neon-blue)] fill-current" />
+          ))}
+        </div>
       </div>
-      <p className="text-gray-700 mb-6 italic">{quote}</p>
+      
+      <p className="text-[var(--text-primary)] mb-6 italic flex-grow leading-relaxed">"{quote}"</p>
+      
       <div className="flex items-center">
         <img
           src={image}
           alt={name}
-          className="w-12 h-12 rounded-full object-cover mr-4 transition-transform duration-300 hover:scale-105"
+          className="w-14 h-14 rounded-full object-cover mr-4 border-2 border-[var(--glass-border)] transition-all duration-300 hover:border-[var(--neon-blue)] hover:shadow-[0_0_20px_rgba(0,212,255,0.3)]"
         />
         <div>
-          <h4 className="font-bold transition-colors duration-300 hover:text-royal-500">
+          <h4 className="font-bold text-[var(--text-primary)] mb-1">
             {name}
           </h4>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-[var(--text-secondary)]">
             {position}, {company}
           </p>
         </div>
       </div>
+      
+      {/* Subtle glow effect */}
+      <div 
+        className="absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300 hover:opacity-100 pointer-events-none"
+        style={{
+          background: 'linear-gradient(135deg, rgba(138, 43, 226, 0.1) 0%, rgba(0, 212, 255, 0.1) 100%)',
+        }}
+      />
     </div>
   );
 };
