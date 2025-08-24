@@ -172,7 +172,7 @@ const handleSubmit = async (e: React.FormEvent) => {
               {/* Contact Information */}
               <div className="lg:col-span-1">
                 <div className="glass-panel p-8 h-full">
-                  <h2 className="text-2xl font-bold mb-6 holographic">Contact Information</h2>
+                  <h2 className="text-2xl font-bold mb-6 holographic-text">Contact Information</h2>
                   <div className="space-y-6">
                     <div className="flex items-start">
                       <div className="flex-shrink-0 mt-1">
@@ -242,7 +242,7 @@ Owner's Email :- ashunuke@gmail.com</p>
               {/* Contact Form */}
               <div className="lg:col-span-2">
                 <div className="glass-panel p-8">
-                  <h2 className="text-2xl font-bold mb-6 holographic">Send Us a Message</h2>
+                  <h2 className="text-2xl font-bold mb-6 holographic-text">Send Us a Message</h2>
                   
                   <form onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
