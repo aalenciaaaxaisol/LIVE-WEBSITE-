@@ -20,8 +20,8 @@ const ThemeToggle: React.FC = () => {
     setIsAnimating(true);
     const newTheme = theme === 'liquid-glass' ? 'classic' : 'liquid-glass';
     
-    // Add transition class to body for smooth theme switching
-    document.body.style.transition = 'all 0.5s ease-in-out';
+    // Add elegant transition for theme switching
+    document.body.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
     
     setTimeout(() => {
       setTheme(newTheme);
@@ -31,36 +31,30 @@ const ThemeToggle: React.FC = () => {
       setTimeout(() => {
         document.body.style.transition = '';
         setIsAnimating(false);
-      }, 500);
+      }, 600);
     }, 50);
   };
 
   return (
     <button
       onClick={toggleTheme}
-      className="theme-toggle glass-button neon-glow"
+      className="theme-toggle luxury-glow"
       aria-label={`Switch to ${theme === 'liquid-glass' ? 'classic' : 'liquid glass'} theme`}
       disabled={isAnimating}
       style={{
-        position: 'fixed',
-        top: '20px',
-        right: '20px',
-        zIndex: 1000,
-        display: 'flex',
-        alignItems: 'center',
-        gap: '8px',
-        fontSize: '14px',
-        fontWeight: '500',
-        minWidth: '140px',
-        justifyContent: 'center',
         opacity: isAnimating ? 0.7 : 1,
         cursor: isAnimating ? 'not-allowed' : 'pointer',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '10px',
+        minWidth: '160px',
+        justifyContent: 'center',
       }}
     >
       {theme === 'liquid-glass' ? (
         <>
           <Monitor size={16} />
-          Classic
+          Classic Mode
         </>
       ) : (
         <>
@@ -68,16 +62,6 @@ const ThemeToggle: React.FC = () => {
           Liquid Glass
         </>
       )}
-      
-      {/* Ripple effect overlay */}
-      <div 
-        className="absolute inset-0 rounded-full opacity-0 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, rgba(0, 212, 255, 0.3) 0%, transparent 70%)',
-          transform: 'scale(0)',
-          transition: 'all 0.3s ease-out',
-        }}
-      />
     </button>
   );
 };

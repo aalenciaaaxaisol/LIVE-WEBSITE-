@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import LiquidGlassBackground from './components/AnimatedBg';
+import LuxuryGlassBackground from './components/AnimatedBg';
 import ThemeToggle from './components/ThemeToggle';
 import ScrollToTop from './components/ScrollToTop';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -52,7 +52,7 @@ function App() {
         <Router>
           <ScrollToTop />
           <div className="flex flex-col min-h-screen relative">
-            <LiquidGlassBackground />
+            <LuxuryGlassBackground />
             <ThemeToggle />
             <div className="relative z-10">
               <Header />

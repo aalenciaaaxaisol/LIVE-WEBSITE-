@@ -12,37 +12,37 @@ interface Particle {
   maxLife: number;
 }
 
-const LiquidGlassBackground: React.FC = () => {
+const LuxuryGlassBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameRef = useRef<number>();
   const particlesRef = useRef<Particle[]>([]);
   const mouseRef = useRef({ x: 0, y: 0 });
 
-  // Performance-optimized particle system
+  // Premium particle system with luxury aesthetics
   const createParticle = useCallback((canvas: HTMLCanvasElement): Particle => {
     const colors = [
-      'rgba(0, 212, 255, 0.6)',    // Neon blue
-      'rgba(138, 43, 226, 0.4)',   // Electric purple
-      'rgba(0, 255, 255, 0.3)',    // Cyan
-      'rgba(255, 0, 255, 0.3)',    // Magenta
+      'rgba(0, 240, 255, 0.4)',    // Neon blue
+      'rgba(155, 89, 255, 0.3)',   // Neon purple
+      'rgba(217, 217, 217, 0.2)',  // Silver
+      'rgba(255, 255, 255, 0.1)',  // White
     ];
 
     return {
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      size: Math.random() * 3 + 1,
-      speedX: (Math.random() - 0.5) * 0.5,
-      speedY: (Math.random() - 0.5) * 0.5,
+      size: Math.random() * 2 + 0.5,
+      speedX: (Math.random() - 0.5) * 0.3,
+      speedY: (Math.random() - 0.5) * 0.3,
       color: colors[Math.floor(Math.random() * colors.length)],
-      opacity: Math.random() * 0.5 + 0.2,
+      opacity: Math.random() * 0.4 + 0.1,
       life: 0,
-      maxLife: Math.random() * 300 + 200,
+      maxLife: Math.random() * 400 + 300,
     };
   }, []);
 
-  // Initialize particles
+  // Initialize particles with luxury density
   const initParticles = useCallback((canvas: HTMLCanvasElement) => {
-    const particleCount = Math.min(50, Math.floor((canvas.width * canvas.height) / 15000));
+    const particleCount = Math.min(40, Math.floor((canvas.width * canvas.height) / 20000));
     particlesRef.current = [];
     
     for (let i = 0; i < particleCount; i++) {
@@ -50,23 +50,23 @@ const LiquidGlassBackground: React.FC = () => {
     }
   }, [createParticle]);
 
-  // Update particle positions and properties
+  // Update particle positions with elegant movement
   const updateParticles = useCallback((canvas: HTMLCanvasElement) => {
     particlesRef.current.forEach((particle, index) => {
-      // Update position
+      // Elegant movement
       particle.x += particle.speedX;
       particle.y += particle.speedY;
       particle.life++;
 
-      // Mouse interaction - subtle attraction
+      // Subtle mouse interaction
       const dx = mouseRef.current.x - particle.x;
       const dy = mouseRef.current.y - particle.y;
       const distance = Math.sqrt(dx * dx + dy * dy);
       
-      if (distance < 100) {
-        const force = (100 - distance) / 100 * 0.01;
-        particle.speedX += dx * force * 0.001;
-        particle.speedY += dy * force * 0.001;
+      if (distance < 120) {
+        const force = (120 - distance) / 120 * 0.005;
+        particle.speedX += dx * force * 0.0005;
+        particle.speedY += dy * force * 0.0005;
       }
 
       // Boundary wrapping
@@ -80,19 +80,19 @@ const LiquidGlassBackground: React.FC = () => {
         particlesRef.current[index] = createParticle(canvas);
       }
 
-      // Opacity pulsing
-      particle.opacity = 0.2 + Math.sin(particle.life * 0.02) * 0.3;
+      // Elegant opacity pulsing
+      particle.opacity = 0.1 + Math.sin(particle.life * 0.01) * 0.2;
     });
   }, [createParticle]);
 
-  // Draw particles with glow effects
+  // Draw particles with luxury glow effects
   const drawParticles = useCallback((ctx: CanvasRenderingContext2D) => {
     particlesRef.current.forEach(particle => {
       ctx.save();
       
-      // Create glow effect
+      // Create luxury glow effect
       ctx.shadowColor = particle.color;
-      ctx.shadowBlur = particle.size * 3;
+      ctx.shadowBlur = particle.size * 4;
       
       // Draw particle
       ctx.globalAlpha = particle.opacity;
@@ -105,9 +105,9 @@ const LiquidGlassBackground: React.FC = () => {
     });
   }, []);
 
-  // Draw connections between nearby particles
+  // Draw elegant connections between nearby particles
   const drawConnections = useCallback((ctx: CanvasRenderingContext2D) => {
-    const maxDistance = 120;
+    const maxDistance = 150;
     
     for (let i = 0; i < particlesRef.current.length; i++) {
       for (let j = i + 1; j < particlesRef.current.length; j++) {
@@ -116,11 +116,11 @@ const LiquidGlassBackground: React.FC = () => {
         const distance = Math.sqrt(dx * dx + dy * dy);
 
         if (distance < maxDistance) {
-          const opacity = (1 - distance / maxDistance) * 0.2;
+          const opacity = (1 - distance / maxDistance) * 0.15;
           
           ctx.save();
-          ctx.strokeStyle = `rgba(0, 212, 255, ${opacity})`;
-          ctx.lineWidth = 1;
+          ctx.strokeStyle = `rgba(0, 240, 255, ${opacity})`;
+          ctx.lineWidth = 0.5;
           ctx.beginPath();
           ctx.moveTo(particlesRef.current[i].x, particlesRef.current[i].y);
           ctx.lineTo(particlesRef.current[j].x, particlesRef.current[j].y);
@@ -131,7 +131,7 @@ const LiquidGlassBackground: React.FC = () => {
     }
   }, []);
 
-  // Main animation loop
+  // Main animation loop with luxury aesthetics
   const animate = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -139,8 +139,8 @@ const LiquidGlassBackground: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Clear canvas with fade effect
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    // Clear canvas with elegant fade effect
+    ctx.fillStyle = 'rgba(10, 15, 31, 0.03)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Update and draw particles
@@ -208,15 +208,15 @@ const LiquidGlassBackground: React.FC = () => {
 
   return (
     <>
-      {/* Cosmic gradient background */}
+      {/* Luxury cosmic gradient background */}
       <div 
         className="fixed inset-0 z-[-2]"
         style={{
           background: `
-            radial-gradient(circle at 20% 80%, rgba(138, 43, 226, 0.3) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.3) 0%, transparent 50%),
-            radial-gradient(circle at 40% 40%, rgba(0, 255, 255, 0.2) 0%, transparent 50%),
-            linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%)
+            radial-gradient(circle at 20% 80%, rgba(155, 89, 255, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(0, 240, 255, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 40% 40%, rgba(217, 217, 217, 0.05) 0%, transparent 50%),
+            linear-gradient(135deg, #0a0f1f 0%, #121212 50%, #0a0f1f 100%)
           `
         }}
       />
@@ -228,37 +228,37 @@ const LiquidGlassBackground: React.FC = () => {
         style={{
           width: '100%',
           height: '100%',
-          opacity: 0.8,
+          opacity: 0.7,
         }}
       />
       
-      {/* Floating orbs for additional depth */}
+      {/* Floating luxury orbs for additional depth */}
       <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
         <div 
-          className="absolute w-96 h-96 rounded-full opacity-20 animate-pulse"
+          className="absolute w-96 h-96 rounded-full opacity-10"
           style={{
-            background: 'radial-gradient(circle, rgba(0, 212, 255, 0.4) 0%, transparent 70%)',
-            top: '10%',
+            background: 'radial-gradient(circle, rgba(0, 240, 255, 0.3) 0%, transparent 70%)',
+            top: '15%',
             left: '10%',
-            animation: 'float 8s ease-in-out infinite',
+            animation: 'elegant-float 12s ease-in-out infinite',
           }}
         />
         <div 
-          className="absolute w-64 h-64 rounded-full opacity-15 animate-pulse"
+          className="absolute w-64 h-64 rounded-full opacity-8"
           style={{
-            background: 'radial-gradient(circle, rgba(138, 43, 226, 0.4) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(155, 89, 255, 0.3) 0%, transparent 70%)',
             top: '60%',
             right: '15%',
-            animation: 'float 6s ease-in-out infinite reverse',
+            animation: 'elegant-float 10s ease-in-out infinite reverse',
           }}
         />
         <div 
-          className="absolute w-48 h-48 rounded-full opacity-10 animate-pulse"
+          className="absolute w-48 h-48 rounded-full opacity-6"
           style={{
-            background: 'radial-gradient(circle, rgba(0, 255, 255, 0.4) 0%, transparent 70%)',
-            bottom: '20%',
-            left: '30%',
-            animation: 'float 10s ease-in-out infinite',
+            background: 'radial-gradient(circle, rgba(217, 217, 217, 0.2) 0%, transparent 70%)',
+            bottom: '25%',
+            left: '35%',
+            animation: 'elegant-float 14s ease-in-out infinite',
           }}
         />
       </div>
@@ -266,4 +266,4 @@ const LiquidGlassBackground: React.FC = () => {
   );
 };
 
-export default LiquidGlassBackground;
+export default LuxuryGlassBackground;

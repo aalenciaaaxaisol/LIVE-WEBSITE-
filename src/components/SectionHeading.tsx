@@ -20,8 +20,8 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({
       <h2 
         className={`text-4xl sm:text-5xl font-bold mb-6 ${
           light 
-            ? 'text-[var(--text-primary)] holographic' 
-            : 'holographic'
+            ? 'text-[var(--text-primary)] holographic-text' 
+            : 'holographic-text'
         }`}
       >
         {title}

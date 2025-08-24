@@ -24,12 +24,12 @@ const Button: React.FC<ButtonProps> = ({
   type = 'button',
   disabled = false,
 }) => {
-  const baseClasses = 'glass-button neon-glow';
+  const baseClasses = 'glass-button luxury-glow';
   
   const variantClasses = {
-    primary: 'border-[var(--neon-blue)] text-[var(--text-primary)] hover:shadow-[0_0_30px_rgba(0,212,255,0.4)]',
-    secondary: 'border-[var(--neon-purple)] text-[var(--text-primary)] hover:shadow-[0_0_30px_rgba(138,43,226,0.4)]',
-    outline: 'border-[var(--glass-border)] text-[var(--text-primary)] hover:border-[var(--neon-blue)] hover:shadow-[0_0_20px_rgba(0,212,255,0.3)]',
+    primary: 'border-[var(--neon-blue)] text-[var(--text-primary)] hover:shadow-[0_0_35px_rgba(0,240,255,0.4)]',
+    secondary: 'border-[var(--neon-purple)] text-[var(--text-primary)] hover:shadow-[0_0_35px_rgba(155,89,255,0.4)]',
+    outline: 'border-[var(--glass-border)] text-[var(--text-primary)] hover:border-[var(--neon-blue)] hover:shadow-[0_0_25px_rgba(0,240,255,0.3)]',
   };
   
   const sizeClasses = {

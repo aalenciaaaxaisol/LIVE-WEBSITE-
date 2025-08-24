@@ -102,8 +102,8 @@ const Header: React.FC = () => {
       </a>
       
       <motion.header
-        className={`fixed w-full z-50 transition-all duration-500 ${
-          scrolled ? 'nav-glass py-2' : 'bg-transparent py-4'
+        className={`fixed w-full z-50 transition-all duration-300 ${
+          scrolled ? 'nav-glass py-3' : 'bg-transparent py-5'
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -112,17 +112,17 @@ const Header: React.FC = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <motion.div className="neon-glow">
+          <motion.div className="luxury-glow">
             <Link to="/" className="flex items-center" onClick={closeMenu}>
               <div className="flex items-center space-x-1 group">
                 <motion.div
-                  whileHover={{ rotate: 15, scale: 1.1 }}
+                  whileHover={{ rotate: 5, scale: 1.05 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Zap size={28} className="text-[var(--neon-blue)] drop-shadow-[0_0_10px_rgba(0,212,255,0.8)]" />
+                  <Zap size={28} className="text-[var(--neon-blue)] drop-shadow-[0_0_15px_rgba(0,240,255,0.6)]" />
                 </motion.div>
                 <motion.span 
-                  className="text-xl font-bold holographic whitespace-nowrap"
+                  className="text-xl font-bold holographic-text whitespace-nowrap"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.2 }}
                 >
@@ -145,9 +145,9 @@ const Header: React.FC = () => {
               >
                 <Link
                   to={link.path}
-                  className={`glass-button text-sm font-medium transition-all duration-300 ${
+                  className={`glass-button text-sm font-medium luxury-glow ${
                     location.pathname === link.path
-                      ? 'border-[var(--neon-blue)] text-[var(--neon-blue)] shadow-[0_0_20px_rgba(0,212,255,0.3)]'
+                      ? 'border-[var(--neon-blue)] text-[var(--neon-blue)] shadow-[0_0_25px_rgba(0,240,255,0.3)]'
                       : 'hover:border-[var(--neon-blue)] hover:text-[var(--neon-blue)]'
                   }`}
                   aria-current={location.pathname === link.path ? 'page' : undefined}
@@ -160,7 +160,7 @@ const Header: React.FC = () => {
             {/* Sitemap Toggle Button */}
             <motion.button
               onClick={toggleSitemap}
-              className="glass-button neon-glow p-2"
+              className="glass-button luxury-glow p-3"
               aria-label="Toggle sitemap"
               aria-expanded={showSitemap}
               whileHover={{ scale: 1.05 }}
@@ -181,7 +181,7 @@ const Header: React.FC = () => {
           >
             <motion.button
               onClick={toggleMenu}
-              className="glass-button neon-glow p-2"
+              className="glass-button luxury-glow p-3"
               aria-label="Toggle menu"
               aria-expanded={isOpen}
               whileHover={{ scale: 1.1 }}
@@ -215,7 +215,7 @@ const Header: React.FC = () => {
                 >
                   <Link
                     to={link.path}
-                    className={`glass-button w-full justify-start ${
+                    className={`glass-button w-full justify-start luxury-glow ${
                       location.pathname === link.path
                         ? 'border-[var(--neon-blue)] text-[var(--neon-blue)]'
                         : 'hover:border-[var(--neon-blue)] hover:text-[var(--neon-blue)]'
@@ -254,7 +254,7 @@ const Header: React.FC = () => {
                   <Link
                     key={link.name}
                     to={link.path}
-                    className={`glass-button text-sm w-full justify-start ${
+                    className={`glass-button text-sm w-full justify-start luxury-glow ${
                       location.pathname === link.path
                         ? 'border-[var(--neon-blue)] text-[var(--neon-blue)]'
                         : 'hover:border-[var(--neon-blue)] hover:text-[var(--neon-blue)]'
