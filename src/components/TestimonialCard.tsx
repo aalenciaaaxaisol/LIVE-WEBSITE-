@@ -17,7 +17,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   image,
 }) => {
   return (
-    <div className="testimonial-card luxury-glow p-6 h-full flex flex-col">
+    <div className="testimonial-card neon-glow p-6 h-full flex flex-col">
       <div className="flex items-center justify-between mb-4">
         <Quote size={28} className="text-[var(--neon-purple)] opacity-60" />
         <div className="flex space-x-1">
@@ -47,9 +47,9 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       
       {/* Subtle glow effect */}
       <div 
-        className="absolute inset-0 rounded-xl opacity-0 transition-opacity duration-400 hover:opacity-100 pointer-events-none"
+        className="absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300 hover:opacity-100 pointer-events-none"
         style={{
-          background: 'linear-gradient(135deg, rgba(155, 89, 255, 0.08) 0%, rgba(0, 240, 255, 0.08) 100%)',
+          background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%)',
         }}
       />
     </div>

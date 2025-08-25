@@ -142,7 +142,7 @@ const handleSubmit = async (e: React.FormEvent) => {
   };
 
   return (
-    <div className="pt-32">
+    <div className="pt-8">
       <SEOHead
         title="Contact - Let's Build the Future Together"
         description="Get in touch with Solvencia Industries' AI experts. Contact us for consultations, project discussions, and custom AI solution development for your business."
@@ -152,11 +152,11 @@ const handleSubmit = async (e: React.FormEvent) => {
       />
 
       {/* Hero Section */}
-      <section className="text-white py-16 md:py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-royal-500 to-royal-700 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]">Let's Build the Future of Your Business Together</h1>
-            <p class="text-xl text-gray-700 mb-10">
+      <section className="py-16 md:py-20">
+        <div className="glass-panel mx-4 sm:mx-6 lg:mx-8">
+          <div className="max-w-3xl mx-auto text-center p-8">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 holographic-text" style={{ fontFamily: 'Orbitron, monospace' }}>Let's Build the Future of Your Business Together</h1>
+            <p className="text-xl text-[var(--text-secondary)] mb-10">
               Get in touch with our experts and explore how Solvencia can transform your vision into success.
             </p>
           </div>
@@ -165,9 +165,8 @@ const handleSubmit = async (e: React.FormEvent) => {
 
       {/* Contact Form and Info */}
       <section className="py-20 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--bg-secondary)] to-transparent opacity-30" />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-6xl mx-auto relative z-10">
+        <div className="glass-panel mx-4 sm:mx-6 lg:mx-8">
+          <div className="max-w-6xl mx-auto relative z-10 p-8">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
               {/* Contact Information */}
               <div className="lg:col-span-1">
@@ -218,7 +217,7 @@ Owner's Email :- ashunuke@gmail.com</p>
                           href={social.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="glass-button w-10 h-10 rounded-full flex items-center justify-center neon-glow"
+                          className="glass-button w-10 h-10 rounded-full flex items-center justify-center neon-glow p-0"
                         >
                           <span className="sr-only">{social.name}</span>
                           <svg className="w-5 h-5 text-[var(--text-primary)]" fill="currentColor" viewBox="0 0 24 24">

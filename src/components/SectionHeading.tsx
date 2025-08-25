@@ -23,6 +23,7 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({
             ? 'text-[var(--text-primary)] holographic-text' 
             : 'holographic-text'
         }`}
+        style={{ fontFamily: 'Orbitron, monospace' }}
       >
         {title}
       </h2>

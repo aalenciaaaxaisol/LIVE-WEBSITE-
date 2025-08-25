@@ -1,10 +1,9 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import Header from './components/Header';
 import Footer from './components/Footer';
-import LuxuryGlassBackground from './components/AnimatedBg';
-import ThemeToggle from './components/ThemeToggle';
+import FuturisticAIBackground from './components/AnimatedBg';
+import BottomNavigation from './components/BottomNavigation';
 import ScrollToTop from './components/ScrollToTop';
 import ErrorBoundary from './components/ErrorBoundary';
 
@@ -29,7 +28,7 @@ const AnimatedRoutes = () => {
   const location = useLocation();
   
   return (
-    <main className="flex-grow relative z-10">
+    <main className="flex-grow relative z-10 pb-24">
         <Suspense fallback={<PageLoader />}>
           <Routes location={location}>
             <Route path="/" element={<Home />} />
@@ -52,12 +51,11 @@ function App() {
         <Router>
           <ScrollToTop />
           <div className="flex flex-col min-h-screen relative">
-            <LuxuryGlassBackground />
-            <ThemeToggle />
+            <FuturisticAIBackground />
             <div className="relative z-10">
-              <Header />
               <AnimatedRoutes />
               <Footer />
+              <BottomNavigation />
             </div>
           </div>
         </Router>

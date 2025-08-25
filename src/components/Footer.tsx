@@ -56,11 +56,11 @@ const Footer: React.FC = () => {
 
   const socialVariants = {
     initial: { 
-      backgroundColor: "rgba(65, 105, 225, 0)",
+      backgroundColor: "rgba(6, 182, 212, 0)",
       scale: 1
     },
     hover: { 
-      backgroundColor: "rgba(65, 105, 225, 1)",
+      backgroundColor: "rgba(6, 182, 212, 1)",
       color: "#ffffff",
       scale: 1.1,
       transition: { duration: 0.3, ease: "easeInOut" }
@@ -70,13 +70,13 @@ const Footer: React.FC = () => {
   return (
     <Suspense fallback={<FooterSkeleton />}>
       <motion.footer 
-        className="bg-gray-900 text-white pt-16 pb-6 relative z-10"
+        className="glass-panel mx-4 sm:mx-6 lg:mx-8 mb-4 pt-16 pb-6 relative z-10"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={containerVariants}
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
             {/* Company Info */}
             <motion.div variants={childVariants}>
@@ -85,20 +85,21 @@ const Footer: React.FC = () => {
                   whileHover={{ rotate: 15, scale: 1.1 }} 
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                 >
-                  <BrainCircuit size={24} className="text-royal-400" />
+                  <BrainCircuit size={24} className="text-[var(--neon-blue)]" />
                 </motion.div>
                 <motion.span 
-                  className="text-xl font-bold bg-gradient-to-r from-royal-400 to-royal-600 bg-clip-text text-transparent"
+                  className="text-xl font-bold holographic-text"
+                  style={{ fontFamily: 'Orbitron, monospace' }}
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                 >
                   Solvencia Industries
                 </motion.span>
               </div>
-              <p className="text-gray-400 mb-4">
+              <p className="text-[var(--text-secondary)] mb-4">
                 Powered by Innovation. Driven by Results.
               </p>
-              <p className="text-gray-400 mb-6">
+              <p className="text-[var(--text-secondary)] mb-6">
                 Join hundreds of businesses transforming their future with Solvencia Industries.
               </p>
               <div className="flex space-x-4">
@@ -113,7 +114,7 @@ const Footer: React.FC = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-royal-400 p-2 rounded-full flex items-center justify-center"
+                    className="text-[var(--text-secondary)] hover:text-[var(--neon-blue)] p-2 rounded-full flex items-center justify-center glass-button"
                     variants={socialVariants}
                     initial="initial"
                     whileHover="hover"
@@ -138,7 +139,7 @@ const Footer: React.FC = () => {
                   { name: 'Contact', path: '/contact' }
                 ].map((link, index) => (
                   <motion.li key={index} variants={linkVariants} whileHover="hover">
-                    <Link to={link.path} className="text-gray-400 hover:text-royal-400 transition-colors duration-300">
+                    <Link to={link.path} className="text-[var(--text-secondary)] hover:text-[var(--neon-blue)] transition-colors duration-300">
                       {link.name}
                     </Link>
                   </motion.li>
@@ -163,7 +164,7 @@ const Footer: React.FC = () => {
                   'AI-Powered Twitter Marketing'
                 ].map((service, index) => (
                   <motion.li key={index} variants={linkVariants} whileHover="hover">
-                    <a href="#" className="text-gray-400 hover:text-royal-400 transition-colors duration-300">
+                    <a href="#" className="text-[var(--text-secondary)] hover:text-[var(--neon-blue)] transition-colors duration-300">
                       {service}
                     </a>
                   </motion.li>
@@ -174,21 +175,21 @@ const Footer: React.FC = () => {
             {/* Newsletter */}
             <motion.div variants={childVariants}>
               <h3 className="text-lg font-semibold mb-4">Subscribe to Our Newsletter</h3>
-              <p className="text-gray-400 mb-4">
+              <p className="text-[var(--text-secondary)] mb-4">
                 Stay updated with our latest AI insights and innovations.
               </p>
               <form className="flex">
                 <motion.input
                   type="email"
                   placeholder="Your email address"
-                  className="px-4 py-2 w-full bg-gray-800 text-white border border-gray-700 rounded-l focus:outline-none focus:ring-1 focus:ring-royal-500 transition-all duration-300"
-                  whileFocus={{ borderColor: 'rgba(65, 105, 225, 0.8)' }}
+                  className="glass-input rounded-l rounded-r-none"
+                  whileFocus={{ borderColor: 'var(--neon-blue)' }}
                 />
                 <motion.button
                   type="submit"
-                  className="bg-royal-500 text-white px-4 py-2 rounded-r hover:bg-royal-600 transition-colors duration-300 flex items-center"
+                  className="glass-button rounded-r rounded-l-none px-4 py-2 flex items-center"
                   whileHover={{ 
-                    backgroundColor: "#2e4fc9",
+                    borderColor: "var(--neon-blue)",
                     scale: 1.05
                   }}
                   whileTap={{ scale: 0.98 }}
@@ -201,10 +202,10 @@ const Footer: React.FC = () => {
           </div>
 
           <motion.div 
-            className="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center"
+            className="border-t border-[var(--glass-border)] pt-6 flex flex-col md:flex-row justify-between items-center"
             variants={childVariants}
           >
-            <p className="text-gray-500 text-sm mb-4 md:mb-0">
+            <p className="text-[var(--text-muted)] text-sm mb-4 md:mb-0">
               © {new Date().getFullYear()} Solvencia Industries. All rights reserved.
             </p>
             <div className="flex space-x-6">
@@ -212,7 +213,7 @@ const Footer: React.FC = () => {
                 <motion.a
                   key={index}
                   href="#" 
-                  className="text-gray-500 hover:text-royal-400 text-sm transition-colors duration-300"
+                  className="text-[var(--text-muted)] hover:text-[var(--neon-blue)] text-sm transition-colors duration-300"
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                 >

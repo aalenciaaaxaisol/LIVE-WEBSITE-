@@ -147,12 +147,13 @@ const Home: React.FC = () => {
 
       {/* Hero Section */}
       <section 
-        className="relative pt-32 pb-20 md:pt-40 md:pb-28"
+        className="relative pt-20 pb-20 md:pt-28 md:pb-28"
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-5xl mx-auto text-center">
+        <div className="glass-panel mx-4 sm:mx-6 lg:mx-8 relative z-10">
+          <div className="max-w-5xl mx-auto text-center p-8 md:p-12">
             <h1 
-              className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-8 holographic-text leading-tight"
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-8 holographic-text leading-tight"
+              style={{ fontFamily: 'Orbitron, monospace' }}
             >
               {titleText}
             </h1>
@@ -177,8 +178,7 @@ const Home: React.FC = () => {
 
       {/* Services Preview */}
       <section className="py-20 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--bg-secondary)] to-transparent opacity-50" />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="glass-panel mx-4 sm:mx-6 lg:mx-8">
           <SectionHeading 
             title="Bespoke AI Solutions" 
             subtitle="Elevate your business with our tailored, cutting-edge AI services designed for exceptional performance and transformative impact."
@@ -212,10 +212,7 @@ const Home: React.FC = () => {
 
       {/* Testimonials */}
       <section className="py-20 relative">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-[var(--neon-purple)] via-transparent to-[var(--neon-blue)] opacity-5" />
-        </div>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="glass-panel mx-4 sm:mx-6 lg:mx-8">
           <SectionHeading 
             title="What Our Clients Say" 
             subtitle="Don't just take our word for it. Hear from visionary businesses that have transformed their operations with our cutting-edge AI solutions."
@@ -243,13 +240,11 @@ const Home: React.FC = () => {
       <section 
         className="py-20 relative overflow-hidden"
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--bg-primary)]" />
-        <div className="absolute inset-0 bg-[var(--gradient-cosmic)] opacity-80" />
-        
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center relative z-10">
+        <div className="glass-panel mx-4 sm:mx-6 lg:mx-8">
+          <div className="max-w-4xl mx-auto text-center relative z-10 p-8 md:p-12">
             <h2 
               className="text-4xl font-bold mb-8 holographic-text"
+              style={{ fontFamily: 'Orbitron, monospace' }}
             >
               Ready to Transform Your Business with AI?
             </h2>

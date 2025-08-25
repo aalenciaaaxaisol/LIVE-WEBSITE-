@@ -12,15 +12,15 @@ interface ServiceCardProps {
 const ServiceCard: React.FC<ServiceCardProps> = ({ icon: Icon, title, description, details }) => {
   return (
     <div 
-      className="service-card floating-elegant luxury-glow group h-full"
+      className="service-card floating-elegant neon-glow group h-full"
     >
       <div className="relative z-10 h-full flex flex-col">
         <div 
-          className="mb-6 p-4 inline-block rounded-xl transition-all duration-300 group-hover:scale-105 group-hover:rotate-1"
+          className="mb-6 p-4 inline-block rounded-xl transition-all duration-300 group-hover:scale-105"
           style={{
             background: 'var(--glass-bg)',
             border: '1px solid var(--glass-border)',
-            boxShadow: '0 0 25px rgba(0, 240, 255, 0.2)',
+            boxShadow: '0 0 20px rgba(6, 182, 212, 0.3)',
           }}
         >
           <Icon size={32} className="text-[var(--neon-blue)]" />
@@ -42,7 +42,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon: Icon, title, descriptio
       
       {/* Floating orb decoration */}
       <div 
-        className="absolute -right-8 -bottom-8 w-32 h-32 rounded-full opacity-15 transition-all duration-500 group-hover:scale-115 group-hover:opacity-25"
+        className="absolute -right-8 -bottom-8 w-32 h-32 rounded-full opacity-10 transition-all duration-500 group-hover:scale-110 group-hover:opacity-20"
         style={{
           background: 'radial-gradient(circle, var(--neon-blue) 0%, transparent 70%)',
           filter: 'blur(20px)',
