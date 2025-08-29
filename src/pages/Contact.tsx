@@ -4,11 +4,15 @@ import {
   Phone, 
   Clock,
   Send,
-  X
+  X,
+  MapPin,
+  Globe,
+  Zap
 } from 'lucide-react';
 import SectionHeading from '../components/SectionHeading';
 import Button from '../components/Button';
 import SEOHead from '../components/SEOHead';
+import ThemeToggle from '../components/ThemeToggle';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -22,6 +26,7 @@ const Contact: React.FC = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<{type: 'success' | 'error', text: string} | null>(null);
+  const [showServicesDropdown, setShowServicesDropdown] = useState(false);
 
   const services = [
     'AI-Powered Customer Support',
@@ -35,6 +40,8 @@ const Contact: React.FC = () => {
     'AI-Enhanced Lead Generation',
     'AI-Powered Twitter Marketing'
   ];
+
+  const [currentTheme, setCurrentTheme] = useState('liquid-glass');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -58,6 +65,18 @@ const Contact: React.FC = () => {
     }));
   };
 
+  const toggleServicesDropdown = () => {
+    setShowServicesDropdown(!showServicesDropdown);
+  };
+
+  const selectAllServices = () => {
+    setFormData(prev => ({ ...prev, services: [...services] }));
+  };
+
+  const clearAllServices = () => {
+    setFormData(prev => ({ ...prev, services: [] }));
+  };
+
 const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
   setIsSubmitting(true);
@@ -66,8 +85,11 @@ const handleSubmit = async (e: React.FormEvent) => {
   try {
     console.log('Form submitted:', formData);
 
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
     // Insert into Supabase
-    const { data, error } = await supabase
+    /* const { data, error } = await supabase
       .from('contacts')
       .insert([{
         name: formData.name,
@@ -76,7 +98,9 @@ const handleSubmit = async (e: React.FormEvent) => {
         company: formData.company,
         message: formData.message,
         services: formData.services // array from checkboxes
-      }]);
+      }]); */
+
+    const error = false; // Simulate success for demo
 
     if (error) {
       console.error('Supabase insert error:', error);
@@ -87,7 +111,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     } else {
       setSubmitMessage({
         type: 'success',
-        text: 'Message received! Our automation elves are on it.'
+        text: 'Message received! Our AI systems are processing your request.'
       });
 
       // Reset form
@@ -141,7 +165,19 @@ const handleSubmit = async (e: React.FormEvent) => {
     }
   };
 
+  // Theme detection
+  React.useEffect(() => {
+    const theme = document.documentElement.getAttribute('data-theme') || 'liquid-glass';
+    setCurrentTheme(theme);
+  }, []);
+
   return (
+    <>
+      {/* Time Travel Background for Contact Page */}
+      {currentTheme === 'time-travel' && (
+        <div className="time-travel-bg"></div>
+      )}
+      
     <div className="pt-8">
       <SEOHead
         title="Contact - Let's Build the Future Together"
@@ -151,12 +187,23 @@ const handleSubmit = async (e: React.FormEvent) => {
         schemaData={contactSchemaData}
       />
 
+      {/* Theme Toggle */}
+      <div className="fixed top-4 right-4 z-50">
+        <ThemeToggle />
+      </div>
+
       {/* Hero Section */}
-      <section className="py-16 md:py-20">
+      <section className={`py-16 md:py-20 ${currentTheme === 'time-travel' ? 'contact-hero circuit-pattern' : ''}`}>
         <div className="glass-panel mx-4 sm:mx-6 lg:mx-8">
-          <div className="max-w-3xl mx-auto text-center p-8">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 holographic-text" style={{ fontFamily: 'Orbitron, monospace' }}>Let's Build the Future of Your Business Together</h1>
-            <p className="text-xl text-[var(--text-secondary)] mb-10">
+          <div className={`max-w-3xl mx-auto text-center p-8 ${currentTheme === 'time-travel' ? 'geometric-accent' : ''}`}>
+            <div className="flex items-center justify-center mb-6">
+              <Zap size={48} className={`${currentTheme === 'time-travel' ? 'text-golden-circuit' : 'text-[var(--neon-blue)]'} mr-4`} />
+              <h1 className={`text-4xl md:text-5xl font-bold holographic-text ${currentTheme === 'time-travel' ? 'text-black' : ''}`} 
+                  style={{ fontFamily: currentTheme === 'time-travel' ? 'Inter, sans-serif' : 'Orbitron, monospace' }}>
+                Let's Build the Future of Your Business Together
+              </h1>
+            </div>
+            <p className={`text-xl mb-10 ${currentTheme === 'time-travel' ? 'text-gray-700' : 'text-[var(--text-secondary)]'}`}>
               Get in touch with our experts and explore how Solvencia can transform your vision into success.
             </p>
           </div>
@@ -165,47 +212,64 @@ const handleSubmit = async (e: React.FormEvent) => {
 
       {/* Contact Form and Info */}
       <section className="py-20 relative">
-        <div className="glass-panel mx-4 sm:mx-6 lg:mx-8">
+        <div className={`glass-panel mx-4 sm:mx-6 lg:mx-8 ${currentTheme === 'time-travel' ? 'circuit-pattern' : ''}`}>
           <div className="max-w-6xl mx-auto relative z-10 p-8">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
               {/* Contact Information */}
               <div className="lg:col-span-1">
-                <div className="glass-panel p-8 h-full">
-                  <h2 className="text-2xl font-bold mb-6 holographic-text">Contact Information</h2>
-                  <div className="space-y-6">
-                    <div className="flex items-start">
-                      <div className="flex-shrink-0 mt-1">
-                        <Mail className="text-[var(--neon-blue)]" size={20} />
+                <div className={`${currentTheme === 'time-travel' ? 'contact-address-section' : 'glass-panel p-8'} h-full`}>
+                  <h2 className={`text-2xl font-bold mb-6 holographic-text ${currentTheme === 'time-travel' ? 'text-black' : ''}`}>Contact Information</h2>
+                  <div className="space-y-4">
+                    <div className={`${currentTheme === 'time-travel' ? 'contact-info-item' : 'flex items-start'}`}>
+                      <div className={`${currentTheme === 'time-travel' ? 'contact-icon-wrapper' : 'flex-shrink-0 mt-1'}`}>
+                        <Mail className={`${currentTheme === 'time-travel' ? 'text-golden-circuit' : 'text-[var(--neon-blue)]'}`} size={20} />
                       </div>
                       <div className="ml-4">
-                        <h3 className="font-semibold text-[var(--text-primary)]">Email Address</h3>
-                        <p className="text-[var(--text-secondary)]">Company Email :- alliance@solvenciaindustries.com<br />
-Owner's Email :- ashunuke@gmail.com</p>
+                        <h3 className={`font-semibold ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>Email Address</h3>
+                        <div className={`${currentTheme === 'time-travel' ? 'text-gray-700' : 'text-[var(--text-secondary)]'} space-y-1`}>
+                          <p className="font-medium">Company Email:</p>
+                          <p className="text-sm">alliance@solvenciaindustries.com</p>
+                          <p className="font-medium mt-2">Owner's Email:</p>
+                          <p className="text-sm">ashunuke@gmail.com</p>
+                        </div>
                       </div>
                     </div>
-                    <div className="flex items-start">
-                      <div className="flex-shrink-0 mt-1">
-                        <Phone className="text-[var(--neon-blue)]" size={20} />
+                    
+                    <div className={`${currentTheme === 'time-travel' ? 'contact-info-item' : 'flex items-start'}`}>
+                      <div className={`${currentTheme === 'time-travel' ? 'contact-icon-wrapper' : 'flex-shrink-0 mt-1'}`}>
+                        <Phone className={`${currentTheme === 'time-travel' ? 'text-golden-circuit' : 'text-[var(--neon-blue)]'}`} size={20} />
                       </div>
                       <div className="ml-4">
-                        <h3 className="font-semibold text-[var(--text-primary)]">Phone Number</h3>
-                        <p className="text-[var(--text-secondary)]">+918149108744</p>
+                        <h3 className={`font-semibold ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>Phone Number</h3>
+                        <p className={`${currentTheme === 'time-travel' ? 'text-gray-700' : 'text-[var(--text-secondary)]'} font-mono text-lg`}>+91 814 910 8744</p>
                       </div>
                     </div>
-                    <div className="flex items-start">
-                      <div className="flex-shrink-0 mt-1">
-                        <Clock className="text-[var(--neon-blue)]" size={20} />
+                    
+                    <div className={`${currentTheme === 'time-travel' ? 'contact-info-item' : 'flex items-start'}`}>
+                      <div className={`${currentTheme === 'time-travel' ? 'contact-icon-wrapper' : 'flex-shrink-0 mt-1'}`}>
+                        <Clock className={`${currentTheme === 'time-travel' ? 'text-golden-circuit' : 'text-[var(--neon-blue)]'}`} size={20} />
                       </div>
                       <div className="ml-4">
-                        <h3 className="font-semibold text-[var(--text-primary)]">Working Hours</h3>
-                        <p className="text-[var(--text-secondary)]">24/7 Always On Always Ready No rest Only Automation</p>
+                        <h3 className={`font-semibold ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>Working Hours</h3>
+                        <p className={`${currentTheme === 'time-travel' ? 'text-gray-700' : 'text-[var(--text-secondary)]'} font-medium`}>24/7 Always On Always Ready</p>
+                        <p className={`${currentTheme === 'time-travel' ? 'text-gray-600' : 'text-[var(--text-secondary)]'} text-sm`}>No rest Only Automation</p>
+                      </div>
+                    </div>
+                    
+                    <div className={`${currentTheme === 'time-travel' ? 'contact-info-item' : 'flex items-start'}`}>
+                      <div className={`${currentTheme === 'time-travel' ? 'contact-icon-wrapper' : 'flex-shrink-0 mt-1'}`}>
+                        <Globe className={`${currentTheme === 'time-travel' ? 'text-golden-circuit' : 'text-[var(--neon-blue)]'}`} size={20} />
+                      </div>
+                      <div className="ml-4">
+                        <h3 className={`font-semibold ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>Service Area</h3>
+                        <p className={`${currentTheme === 'time-travel' ? 'text-gray-700' : 'text-[var(--text-secondary)]'}`}>India & Worldwide</p>
                       </div>
                     </div>
                   </div>
                   
-                  <div className="mt-8 pt-8 border-t border-[var(--glass-border)]">
-                    <h3 className="font-semibold mb-4 text-[var(--text-primary)]">Connect With Us</h3>
-                    <div className="flex space-x-4">
+                  <div className={`${currentTheme === 'time-travel' ? 'social-links' : 'mt-8 pt-8 border-t border-[var(--glass-border)]'}`}>
+                    <h3 className={`font-semibold mb-4 ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>Connect With Us</h3>
+                    <div className={`${currentTheme === 'time-travel' ? 'flex gap-4' : 'flex space-x-4'}`}>
                       {[
                         { name: 'linkedin', url: 'https://www.linkedin.com/in/ashish-yadav-0b839b342/' },
                         { name: 'twitter', url: 'https://x.com/iamAashuuu' },
@@ -217,10 +281,10 @@ Owner's Email :- ashunuke@gmail.com</p>
                           href={social.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="glass-button w-10 h-10 rounded-full flex items-center justify-center neon-glow p-0"
+                          className={`${currentTheme === 'time-travel' ? 'social-link' : 'glass-button w-10 h-10 rounded-full flex items-center justify-center neon-glow p-0'}`}
                         >
                           <span className="sr-only">{social.name}</span>
-                          <svg className="w-5 h-5 text-[var(--text-primary)]" fill="currentColor" viewBox="0 0 24 24">
+                          <svg className={`w-5 h-5 ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`} fill="currentColor" viewBox="0 0 24 24">
                             <path d={
                               social.name === 'linkedin' 
                                 ? 'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z'
@@ -240,13 +304,13 @@ Owner's Email :- ashunuke@gmail.com</p>
               
               {/* Contact Form */}
               <div className="lg:col-span-2">
-                <div className="glass-panel p-8">
-                  <h2 className="text-2xl font-bold mb-6 holographic-text">Send Us a Message</h2>
+                <div className={`${currentTheme === 'time-travel' ? 'contact-form-container glossy-surface' : 'glass-panel'} p-8`}>
+                  <h2 className={`text-2xl font-bold mb-6 holographic-text ${currentTheme === 'time-travel' ? 'text-black' : ''}`}>Send Us a Message</h2>
                   
                   <form onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                       <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-[var(--text-primary)] mb-1">
+                        <label htmlFor="name" className={`block text-sm font-medium mb-1 ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>
                           Full Name <span className="text-red-500">*</span>
                         </label>
                         <input
@@ -260,7 +324,7 @@ Owner's Email :- ashunuke@gmail.com</p>
                         />
                       </div>
                       <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-[var(--text-primary)] mb-1">
+                        <label htmlFor="email" className={`block text-sm font-medium mb-1 ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>
                           Email Address <span className="text-red-500">*</span>
                         </label>
                         <input
@@ -274,7 +338,7 @@ Owner's Email :- ashunuke@gmail.com</p>
                         />
                       </div>
                       <div>
-                        <label htmlFor="phone" className="block text-sm font-medium text-[var(--text-primary)] mb-1">
+                        <label htmlFor="phone" className={`block text-sm font-medium mb-1 ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>
                           Phone Number
                         </label>
                         <input
@@ -287,7 +351,7 @@ Owner's Email :- ashunuke@gmail.com</p>
                         />
                       </div>
                       <div>
-                        <label htmlFor="company" className="block text-sm font-medium text-[var(--text-primary)] mb-1">
+                        <label htmlFor="company" className={`block text-sm font-medium mb-1 ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>
                           Company Name
                         </label>
                         <input
@@ -300,24 +364,43 @@ Owner's Email :- ashunuke@gmail.com</p>
                         />
                       </div>
                       <div className="sm:col-span-2">
-                        <label className="block text-sm font-medium text-[var(--text-primary)] mb-1">
+                        <label className={`block text-sm font-medium mb-1 ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>
                           Services of Interest
                         </label>
+                        
+                        {/* Service Selection Controls */}
+                        <div className="flex gap-2 mb-3">
+                          <button 
+                            type="button" 
+                            onClick={toggleServicesDropdown}
+                            className={`glass-button text-sm ${currentTheme === 'time-travel' ? 'circuit-glow' : ''}`}
+                          >
+                            {showServicesDropdown ? 'Hide Services' : 'Select Services'}
+                          </button>
+                          <button type="button" onClick={selectAllServices} className="glass-button text-sm">Select All</button>
+                          <button type="button" onClick={clearAllServices} className="glass-button text-sm">Clear All</button>
+                        </div>
+                        
+                        {/* Selected Services Display */}
                         <div className="mb-3 flex flex-wrap gap-2">
                           {formData.services.map(service => (
-                            <div key={service} className="glass-button px-3 py-1 text-sm flex items-center">
+                            <div key={service} className={`${currentTheme === 'time-travel' ? 'selected-service-tag' : 'glass-button px-3 py-1 text-sm flex items-center'}`}>
                               {service}
                               <button 
                                 type="button" 
                                 onClick={() => removeService(service)}
                                 className="ml-1 focus:outline-none"
                               >
-                                <X size={14} className="text-[var(--neon-blue)]" />
+                                <X size={14} className={`${currentTheme === 'time-travel' ? 'text-golden-circuit hover:text-red-500' : 'text-[var(--neon-blue)]'}`} />
                               </button>
                             </div>
                           ))}
                         </div>
-                        <div className="glass-panel p-4 max-h-48 overflow-y-auto">
+                        
+                        {/* Services Dropdown with Scrolling */}
+                        {showServicesDropdown && (
+                        <div className={`${currentTheme === 'time-travel' ? 'services-dropdown' : 'glass-panel'} p-4`}>
+                          <div className="mb-2 text-sm text-gray-600">Select multiple services (scroll to see all {services.length} options):</div>
                           {services.map((service) => (
                             <div key={service} className="mb-2 last:mb-0">
                               <label className="inline-flex items-center cursor-pointer">
@@ -325,16 +408,21 @@ Owner's Email :- ashunuke@gmail.com</p>
                                   type="checkbox"
                                   checked={formData.services.includes(service)}
                                   onChange={() => handleServiceToggle(service)}
-                                  className="w-4 h-4 text-[var(--neon-blue)] bg-transparent border-[var(--glass-border)] rounded focus:ring-[var(--neon-blue)]"
+                                  className={`service-checkbox w-4 h-4 rounded focus:ring-2 ${
+                                    currentTheme === 'time-travel' 
+                                      ? 'text-golden-circuit bg-white border-golden-circuit focus:ring-golden-circuit' 
+                                      : 'text-[var(--neon-blue)] bg-transparent border-[var(--glass-border)] focus:ring-[var(--neon-blue)]'
+                                  }`}
                                 />
-                                <span className="ml-2 text-[var(--text-primary)]">{service}</span>
+                                <span className={`ml-2 ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>{service}</span>
                               </label>
                             </div>
                           ))}
                         </div>
+                        )}
                       </div>
                       <div className="sm:col-span-2">
-                        <label htmlFor="message" className="block text-sm font-medium text-[var(--text-primary)] mb-1">
+                        <label htmlFor="message" className={`block text-sm font-medium mb-1 ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>
                           Your Message <span className="text-red-500">*</span>
                         </label>
                         <textarea
@@ -374,8 +462,14 @@ Owner's Email :- ashunuke@gmail.com</p>
                       
                       {/* Submission Status Messages */}
                       {submitMessage && (
-                        <div className={`p-4 rounded-md ${
-                          submitMessage.type === 'success' ? 'glass-panel border-green-500 text-green-400' : 'glass-panel border-red-500 text-red-400'
+                        <div className={`p-4 rounded-md transition-all duration-300 ${
+                          submitMessage.type === 'success' 
+                            ? currentTheme === 'time-travel' 
+                              ? 'bg-green-50 border-2 border-green-400 text-green-800' 
+                              : 'glass-panel border-green-500 text-green-400'
+                            : currentTheme === 'time-travel'
+                              ? 'bg-red-50 border-2 border-red-400 text-red-800'
+                              : 'glass-panel border-red-500 text-red-400'
                         }`}>
                           {submitMessage.text}
                         </div>
@@ -389,6 +483,7 @@ Owner's Email :- ashunuke@gmail.com</p>
         </div>
       </section>
     </div>
+    </>
   );
 };
 
