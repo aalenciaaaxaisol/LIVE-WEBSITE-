@@ -1,11 +1,11 @@
 import React, { Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
-import { Flame, Linkedin, Twitter, Instagram, MessageCircle as WhatsApp, ArrowRight } from 'lucide-react';
+import { BrainCircuit, Linkedin, Twitter, Instagram, Apple as WhatsApp, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 // Loading skeleton component
 const FooterSkeleton = () => (
-  <div className="fireglass-panel pt-16 pb-6 relative z-10">
+  <div className="bg-gray-900 text-white pt-16 pb-6 relative z-10">
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
         {[...Array(4)].map((_, i) => (
@@ -70,7 +70,7 @@ const Footer: React.FC = () => {
   return (
     <Suspense fallback={<FooterSkeleton />}>
       <motion.footer 
-        className="fireglass-panel mx-4 sm:mx-6 lg:mx-8 mb-4 pt-16 pb-6 relative z-10"
+        className="glass-panel mx-4 sm:mx-6 lg:mx-8 mb-4 pt-16 pb-6 relative z-10"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
@@ -85,10 +85,10 @@ const Footer: React.FC = () => {
                   whileHover={{ rotate: 15, scale: 1.1 }} 
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                 >
-                  <Flame size={24} className="text-[var(--ember-orange)]" />
+                  <BrainCircuit size={24} className="text-[var(--neon-blue)]" />
                 </motion.div>
                 <motion.span 
-                  className="text-xl font-bold molten-text"
+                  className="text-xl font-bold holographic-text"
                   style={{ fontFamily: 'Orbitron, monospace' }}
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
@@ -114,7 +114,7 @@ const Footer: React.FC = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[var(--text-secondary)] hover:text-[var(--ember-orange)] p-2 rounded-full flex items-center justify-center fireglass-button"
+                    className="text-[var(--text-secondary)] hover:text-[var(--neon-blue)] p-2 rounded-full flex items-center justify-center glass-button"
                     variants={socialVariants}
                     initial="initial"
                     whileHover="hover"
@@ -139,7 +139,7 @@ const Footer: React.FC = () => {
                   { name: 'Contact', path: '/contact' }
                 ].map((link, index) => (
                   <motion.li key={index} variants={linkVariants} whileHover="hover">
-                    <Link to={link.path} className="text-[var(--text-secondary)] hover:text-[var(--ember-orange)] transition-colors duration-300">
+                    <Link to={link.path} className="text-[var(--text-secondary)] hover:text-[var(--neon-blue)] transition-colors duration-300">
                       {link.name}
                     </Link>
                   </motion.li>
@@ -164,7 +164,7 @@ const Footer: React.FC = () => {
                   'AI-Powered Twitter Marketing'
                 ].map((service, index) => (
                   <motion.li key={index} variants={linkVariants} whileHover="hover">
-                    <a href="#" className="text-[var(--text-secondary)] hover:text-[var(--ember-orange)] transition-colors duration-300">
+                    <a href="#" className="text-[var(--text-secondary)] hover:text-[var(--neon-blue)] transition-colors duration-300">
                       {service}
                     </a>
                   </motion.li>
@@ -182,14 +182,14 @@ const Footer: React.FC = () => {
                 <motion.input
                   type="email"
                   placeholder="Your email address"
-                  className="fireglass-input rounded-l rounded-r-none"
-                  whileFocus={{ borderColor: 'var(--molten-gold)' }}
+                  className="glass-input rounded-l rounded-r-none"
+                  whileFocus={{ borderColor: 'var(--neon-blue)' }}
                 />
                 <motion.button
                   type="submit"
-                  className="fireglass-button rounded-r rounded-l-none px-4 py-2 flex items-center"
+                  className="glass-button rounded-r rounded-l-none px-4 py-2 flex items-center"
                   whileHover={{ 
-                    borderColor: "var(--molten-gold)",
+                    borderColor: "var(--neon-blue)",
                     scale: 1.05
                   }}
                   whileTap={{ scale: 0.98 }}
@@ -202,7 +202,7 @@ const Footer: React.FC = () => {
           </div>
 
           <motion.div 
-            className="border-t border-[var(--fireglass-border)] pt-6 flex flex-col md:flex-row justify-between items-center"
+            className="border-t border-[var(--glass-border)] pt-6 flex flex-col md:flex-row justify-between items-center"
             variants={childVariants}
           >
             <p className="text-[var(--text-muted)] text-sm mb-4 md:mb-0">
@@ -213,7 +213,7 @@ const Footer: React.FC = () => {
                 <motion.a
                   key={index}
                   href="#" 
-                  className="text-[var(--text-muted)] hover:text-[var(--ember-orange)] text-sm transition-colors duration-300"
+                  className="text-[var(--text-muted)] hover:text-[var(--neon-blue)] text-sm transition-colors duration-300"
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                 >
