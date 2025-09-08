@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Footer from './components/Footer';
-import FuturisticAIBackground from './components/AnimatedBg';
+import FireGlassBackground from './components/AnimatedBg';
 import BottomNavigation from './components/BottomNavigation';
 import ScrollToTop from './components/ScrollToTop';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -51,7 +51,7 @@ function App() {
         <Router>
           <ScrollToTop />
           <div className="flex flex-col min-h-screen relative">
-            <FuturisticAIBackground />
+            <FireGlassBackground />
             <div className="relative z-10">
               <AnimatedRoutes />
               <Footer />
