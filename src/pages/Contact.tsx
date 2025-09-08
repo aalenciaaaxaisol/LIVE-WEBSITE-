@@ -12,7 +12,6 @@ import {
 import SectionHeading from '../components/SectionHeading';
 import Button from '../components/Button';
 import SEOHead from '../components/SEOHead';
-import ThemeToggle from '../components/ThemeToggle';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -40,8 +39,6 @@ const Contact: React.FC = () => {
     'AI-Enhanced Lead Generation',
     'AI-Powered Twitter Marketing'
   ];
-
-  const [currentTheme, setCurrentTheme] = useState('liquid-glass');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -135,75 +132,27 @@ const handleSubmit = async (e: React.FormEvent) => {
   }
 };
 
-  const contactSchemaData = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "Contact - Let's Build the Future Together",
-    "description": "Get in touch with Solvencia Industries' AI experts. Contact us for consultations, project discussions, and custom AI solution development.",
-    "url": "https://solvenciaindustries.com/contact",
-    "mainEntity": {
-      "@type": "ContactPage",
-      "name": "Contact Solvencia Industries",
-      "description": "Connect with our AI experts to transform your business vision into success"
-    },
-    "breadcrumb": {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://solvenciaindustries.com/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Contact",
-          "item": "https://solvenciaindustries.com/contact"
-        }
-      ]
-    }
-  };
-
-  // Theme detection
-  React.useEffect(() => {
-    const theme = document.documentElement.getAttribute('data-theme') || 'liquid-glass';
-    setCurrentTheme(theme);
-  }, []);
-
   return (
-    <>
-      {/* Time Travel Background for Contact Page */}
-      {currentTheme === 'time-travel' && (
-        <div className="time-travel-bg"></div>
-      )}
-      
     <div className="pt-8">
       <SEOHead
         title="Contact - Let's Build the Future Together"
         description="Get in touch with Solvencia Industries' AI experts. Contact us for consultations, project discussions, and custom AI solution development for your business."
         canonical="https://solvenciaindustries.com/contact"
         keywords="contact Solvencia Industries, AI consultation, business automation contact, AI project inquiry, custom AI development"
-        schemaData={contactSchemaData}
       />
 
-      {/* Theme Toggle */}
-      <div className="fixed top-4 right-4 z-50">
-        <ThemeToggle />
-      </div>
-
       {/* Hero Section */}
-      <section className={`py-16 md:py-20 ${currentTheme === 'time-travel' ? 'contact-hero circuit-pattern' : ''}`}>
-        <div className="glass-panel mx-4 sm:mx-6 lg:mx-8">
-          <div className={`max-w-3xl mx-auto text-center p-8 ${currentTheme === 'time-travel' ? 'geometric-accent' : ''}`}>
+      <section className="py-16 md:py-20">
+        <div className="fireglass-panel mx-4 sm:mx-6 lg:mx-8">
+          <div className="max-w-3xl mx-auto text-center p-8">
             <div className="flex items-center justify-center mb-6">
-              <Zap size={48} className={`${currentTheme === 'time-travel' ? 'text-golden-circuit' : 'text-[var(--neon-blue)]'} mr-4`} />
-              <h1 className={`text-4xl md:text-5xl font-bold holographic-text ${currentTheme === 'time-travel' ? 'text-black' : ''}`} 
-                  style={{ fontFamily: currentTheme === 'time-travel' ? 'Inter, sans-serif' : 'Orbitron, monospace' }}>
+              <Zap size={48} className="text-[var(--ember-orange)] mr-4" />
+              <h1 className="text-4xl md:text-5xl font-bold molten-text" 
+                  style={{ fontFamily: 'Orbitron, monospace' }}>
                 Let's Build the Future of Your Business Together
               </h1>
             </div>
-            <p className={`text-xl mb-10 ${currentTheme === 'time-travel' ? 'text-gray-700' : 'text-[var(--text-secondary)]'}`}>
+            <p className="text-xl mb-10 text-[var(--text-secondary)]">
               Get in touch with our experts and explore how Solvencia can transform your vision into success.
             </p>
           </div>
@@ -212,21 +161,21 @@ const handleSubmit = async (e: React.FormEvent) => {
 
       {/* Contact Form and Info */}
       <section className="py-20 relative">
-        <div className={`glass-panel mx-4 sm:mx-6 lg:mx-8 ${currentTheme === 'time-travel' ? 'circuit-pattern' : ''}`}>
+        <div className="fireglass-panel mx-4 sm:mx-6 lg:mx-8">
           <div className="max-w-6xl mx-auto relative z-10 p-8">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
               {/* Contact Information */}
               <div className="lg:col-span-1">
-                <div className={`${currentTheme === 'time-travel' ? 'contact-address-section' : 'glass-panel p-8'} h-full`}>
-                  <h2 className={`text-2xl font-bold mb-6 holographic-text ${currentTheme === 'time-travel' ? 'text-black' : ''}`}>Contact Information</h2>
+                <div className="fireglass-panel p-8 h-full">
+                  <h2 className="text-2xl font-bold mb-6 molten-text">Contact Information</h2>
                   <div className="space-y-4">
-                    <div className={`${currentTheme === 'time-travel' ? 'contact-info-item' : 'flex items-start'}`}>
-                      <div className={`${currentTheme === 'time-travel' ? 'contact-icon-wrapper' : 'flex-shrink-0 mt-1'}`}>
-                        <Mail className={`${currentTheme === 'time-travel' ? 'text-golden-circuit' : 'text-[var(--neon-blue)]'}`} size={20} />
+                    <div className="flex items-start">
+                      <div className="flex-shrink-0 mt-1">
+                        <Mail className="text-[var(--ember-orange)]" size={20} />
                       </div>
                       <div className="ml-4">
-                        <h3 className={`font-semibold ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>Email Address</h3>
-                        <div className={`${currentTheme === 'time-travel' ? 'text-gray-700' : 'text-[var(--text-secondary)]'} space-y-1`}>
+                        <h3 className="font-semibold text-[var(--text-primary)]">Email Address</h3>
+                        <div className="text-[var(--text-secondary)] space-y-1">
                           <p className="font-medium">Company Email:</p>
                           <p className="text-sm">alliance@solvenciaindustries.com</p>
                           <p className="font-medium mt-2">Owner's Email:</p>
@@ -235,41 +184,41 @@ const handleSubmit = async (e: React.FormEvent) => {
                       </div>
                     </div>
                     
-                    <div className={`${currentTheme === 'time-travel' ? 'contact-info-item' : 'flex items-start'}`}>
-                      <div className={`${currentTheme === 'time-travel' ? 'contact-icon-wrapper' : 'flex-shrink-0 mt-1'}`}>
-                        <Phone className={`${currentTheme === 'time-travel' ? 'text-golden-circuit' : 'text-[var(--neon-blue)]'}`} size={20} />
+                    <div className="flex items-start">
+                      <div className="flex-shrink-0 mt-1">
+                        <Phone className="text-[var(--ember-orange)]" size={20} />
                       </div>
                       <div className="ml-4">
-                        <h3 className={`font-semibold ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>Phone Number</h3>
-                        <p className={`${currentTheme === 'time-travel' ? 'text-gray-700' : 'text-[var(--text-secondary)]'} font-mono text-lg`}>+91 814 910 8744</p>
+                        <h3 className="font-semibold text-[var(--text-primary)]">Phone Number</h3>
+                        <p className="text-[var(--text-secondary)] font-mono text-lg">+91 814 910 8744</p>
                       </div>
                     </div>
                     
-                    <div className={`${currentTheme === 'time-travel' ? 'contact-info-item' : 'flex items-start'}`}>
-                      <div className={`${currentTheme === 'time-travel' ? 'contact-icon-wrapper' : 'flex-shrink-0 mt-1'}`}>
-                        <Clock className={`${currentTheme === 'time-travel' ? 'text-golden-circuit' : 'text-[var(--neon-blue)]'}`} size={20} />
+                    <div className="flex items-start">
+                      <div className="flex-shrink-0 mt-1">
+                        <Clock className="text-[var(--ember-orange)]" size={20} />
                       </div>
                       <div className="ml-4">
-                        <h3 className={`font-semibold ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>Working Hours</h3>
-                        <p className={`${currentTheme === 'time-travel' ? 'text-gray-700' : 'text-[var(--text-secondary)]'} font-medium`}>24/7 Always On Always Ready</p>
-                        <p className={`${currentTheme === 'time-travel' ? 'text-gray-600' : 'text-[var(--text-secondary)]'} text-sm`}>No rest Only Automation</p>
+                        <h3 className="font-semibold text-[var(--text-primary)]">Working Hours</h3>
+                        <p className="text-[var(--text-secondary)] font-medium">24/7 Always On Always Ready</p>
+                        <p className="text-[var(--text-secondary)] text-sm">No rest Only Automation</p>
                       </div>
                     </div>
                     
-                    <div className={`${currentTheme === 'time-travel' ? 'contact-info-item' : 'flex items-start'}`}>
-                      <div className={`${currentTheme === 'time-travel' ? 'contact-icon-wrapper' : 'flex-shrink-0 mt-1'}`}>
-                        <Globe className={`${currentTheme === 'time-travel' ? 'text-golden-circuit' : 'text-[var(--neon-blue)]'}`} size={20} />
+                    <div className="flex items-start">
+                      <div className="flex-shrink-0 mt-1">
+                        <Globe className="text-[var(--ember-orange)]" size={20} />
                       </div>
                       <div className="ml-4">
-                        <h3 className={`font-semibold ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>Service Area</h3>
-                        <p className={`${currentTheme === 'time-travel' ? 'text-gray-700' : 'text-[var(--text-secondary)]'}`}>India & Worldwide</p>
+                        <h3 className="font-semibold text-[var(--text-primary)]">Service Area</h3>
+                        <p className="text-[var(--text-secondary)]">India & Worldwide</p>
                       </div>
                     </div>
                   </div>
                   
-                  <div className={`${currentTheme === 'time-travel' ? 'social-links' : 'mt-8 pt-8 border-t border-[var(--glass-border)]'}`}>
-                    <h3 className={`font-semibold mb-4 ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>Connect With Us</h3>
-                    <div className={`${currentTheme === 'time-travel' ? 'flex gap-4' : 'flex space-x-4'}`}>
+                  <div className="mt-8 pt-8 border-t border-[var(--fireglass-border)]">
+                    <h3 className="font-semibold mb-4 text-[var(--text-primary)]">Connect With Us</h3>
+                    <div className="flex space-x-4">
                       {[
                         { name: 'linkedin', url: 'https://www.linkedin.com/in/ashish-yadav-0b839b342/' },
                         { name: 'twitter', url: 'https://x.com/iamAashuuu' },
@@ -281,10 +230,10 @@ const handleSubmit = async (e: React.FormEvent) => {
                           href={social.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className={`${currentTheme === 'time-travel' ? 'social-link' : 'glass-button w-10 h-10 rounded-full flex items-center justify-center neon-glow p-0'}`}
+                          className="fireglass-button w-10 h-10 rounded-full flex items-center justify-center ember-glow-pulse p-0"
                         >
                           <span className="sr-only">{social.name}</span>
-                          <svg className={`w-5 h-5 ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`} fill="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-5 h-5 text-[var(--text-primary)]" fill="currentColor" viewBox="0 0 24 24">
                             <path d={
                               social.name === 'linkedin' 
                                 ? 'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z'
@@ -304,13 +253,13 @@ const handleSubmit = async (e: React.FormEvent) => {
               
               {/* Contact Form */}
               <div className="lg:col-span-2">
-                <div className={`${currentTheme === 'time-travel' ? 'contact-form-container glossy-surface' : 'glass-panel'} p-8`}>
-                  <h2 className={`text-2xl font-bold mb-6 holographic-text ${currentTheme === 'time-travel' ? 'text-black' : ''}`}>Send Us a Message</h2>
+                <div className="fireglass-panel p-8">
+                  <h2 className="text-2xl font-bold mb-6 molten-text">Send Us a Message</h2>
                   
                   <form onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                       <div>
-                        <label htmlFor="name" className={`block text-sm font-medium mb-1 ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>
+                        <label htmlFor="name" className="block text-sm font-medium mb-1 text-[var(--text-primary)]">
                           Full Name <span className="text-red-500">*</span>
                         </label>
                         <input
@@ -320,11 +269,11 @@ const handleSubmit = async (e: React.FormEvent) => {
                           value={formData.name}
                           onChange={handleChange}
                           required
-                          className="glass-input"
+                          className="fireglass-input"
                         />
                       </div>
                       <div>
-                        <label htmlFor="email" className={`block text-sm font-medium mb-1 ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>
+                        <label htmlFor="email" className="block text-sm font-medium mb-1 text-[var(--text-primary)]">
                           Email Address <span className="text-red-500">*</span>
                         </label>
                         <input
@@ -334,11 +283,11 @@ const handleSubmit = async (e: React.FormEvent) => {
                           value={formData.email}
                           onChange={handleChange}
                           required
-                          className="glass-input"
+                          className="fireglass-input"
                         />
                       </div>
                       <div>
-                        <label htmlFor="phone" className={`block text-sm font-medium mb-1 ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>
+                        <label htmlFor="phone" className="block text-sm font-medium mb-1 text-[var(--text-primary)]">
                           Phone Number
                         </label>
                         <input
@@ -347,11 +296,11 @@ const handleSubmit = async (e: React.FormEvent) => {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="glass-input"
+                          className="fireglass-input"
                         />
                       </div>
                       <div>
-                        <label htmlFor="company" className={`block text-sm font-medium mb-1 ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>
+                        <label htmlFor="company" className="block text-sm font-medium mb-1 text-[var(--text-primary)]">
                           Company Name
                         </label>
                         <input
@@ -360,11 +309,11 @@ const handleSubmit = async (e: React.FormEvent) => {
                           name="company"
                           value={formData.company}
                           onChange={handleChange}
-                          className="glass-input"
+                          className="fireglass-input"
                         />
                       </div>
                       <div className="sm:col-span-2">
-                        <label className={`block text-sm font-medium mb-1 ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>
+                        <label className="block text-sm font-medium mb-1 text-[var(--text-primary)]">
                           Services of Interest
                         </label>
                         
@@ -373,25 +322,25 @@ const handleSubmit = async (e: React.FormEvent) => {
                           <button 
                             type="button" 
                             onClick={toggleServicesDropdown}
-                            className={`glass-button text-sm ${currentTheme === 'time-travel' ? 'circuit-glow' : ''}`}
+                            className="fireglass-button text-sm"
                           >
                             {showServicesDropdown ? 'Hide Services' : 'Select Services'}
                           </button>
-                          <button type="button" onClick={selectAllServices} className="glass-button text-sm">Select All</button>
-                          <button type="button" onClick={clearAllServices} className="glass-button text-sm">Clear All</button>
+                          <button type="button" onClick={selectAllServices} className="fireglass-button text-sm">Select All</button>
+                          <button type="button" onClick={clearAllServices} className="fireglass-button text-sm">Clear All</button>
                         </div>
                         
                         {/* Selected Services Display */}
                         <div className="mb-3 flex flex-wrap gap-2">
                           {formData.services.map(service => (
-                            <div key={service} className={`${currentTheme === 'time-travel' ? 'selected-service-tag' : 'glass-button px-3 py-1 text-sm flex items-center'}`}>
+                            <div key={service} className="fireglass-button px-3 py-1 text-sm flex items-center">
                               {service}
                               <button 
                                 type="button" 
                                 onClick={() => removeService(service)}
                                 className="ml-1 focus:outline-none"
                               >
-                                <X size={14} className={`${currentTheme === 'time-travel' ? 'text-golden-circuit hover:text-red-500' : 'text-[var(--neon-blue)]'}`} />
+                                <X size={14} className="text-[var(--ember-orange)] hover:text-red-500" />
                               </button>
                             </div>
                           ))}
@@ -399,7 +348,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                         
                         {/* Services Dropdown with Scrolling */}
                         {showServicesDropdown && (
-                        <div className={`${currentTheme === 'time-travel' ? 'services-dropdown' : 'glass-panel'} p-4`}>
+                        <div className="fireglass-panel p-4">
                           <div className="mb-2 text-sm text-gray-600">Select multiple services (scroll to see all {services.length} options):</div>
                           {services.map((service) => (
                             <div key={service} className="mb-2 last:mb-0">
@@ -408,13 +357,9 @@ const handleSubmit = async (e: React.FormEvent) => {
                                   type="checkbox"
                                   checked={formData.services.includes(service)}
                                   onChange={() => handleServiceToggle(service)}
-                                  className={`service-checkbox w-4 h-4 rounded focus:ring-2 ${
-                                    currentTheme === 'time-travel' 
-                                      ? 'text-golden-circuit bg-white border-golden-circuit focus:ring-golden-circuit' 
-                                      : 'text-[var(--neon-blue)] bg-transparent border-[var(--glass-border)] focus:ring-[var(--neon-blue)]'
-                                  }`}
+                                  className="w-4 h-4 rounded focus:ring-2 text-[var(--ember-orange)] bg-transparent border-[var(--fireglass-border)] focus:ring-[var(--ember-orange)]"
                                 />
-                                <span className={`ml-2 ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>{service}</span>
+                                <span className="ml-2 text-[var(--text-primary)]">{service}</span>
                               </label>
                             </div>
                           ))}
@@ -422,7 +367,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                         )}
                       </div>
                       <div className="sm:col-span-2">
-                        <label htmlFor="message" className={`block text-sm font-medium mb-1 ${currentTheme === 'time-travel' ? 'text-black' : 'text-[var(--text-primary)]'}`}>
+                        <label htmlFor="message" className="block text-sm font-medium mb-1 text-[var(--text-primary)]">
                           Your Message <span className="text-red-500">*</span>
                         </label>
                         <textarea
@@ -432,7 +377,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                           onChange={handleChange}
                           required
                           rows={6}
-                          className="glass-input resize-none"
+                          className="fireglass-input resize-none"
                         ></textarea>
                       </div>
                     </div>
@@ -462,14 +407,10 @@ const handleSubmit = async (e: React.FormEvent) => {
                       
                       {/* Submission Status Messages */}
                       {submitMessage && (
-                        <div className={`p-4 rounded-md transition-all duration-300 ${
+                        <div className={`fireglass-panel p-4 transition-all duration-300 ${
                           submitMessage.type === 'success' 
-                            ? currentTheme === 'time-travel' 
-                              ? 'bg-green-50 border-2 border-green-400 text-green-800' 
-                              : 'glass-panel border-green-500 text-green-400'
-                            : currentTheme === 'time-travel'
-                              ? 'bg-red-50 border-2 border-red-400 text-red-800'
-                              : 'glass-panel border-red-500 text-red-400'
+                            ? 'border-green-500 text-green-400'
+                            : 'border-red-500 text-red-400'
                         }`}>
                           {submitMessage.text}
                         </div>
@@ -483,7 +424,6 @@ const handleSubmit = async (e: React.FormEvent) => {
         </div>
       </section>
     </div>
-    </>
   );
 };
 

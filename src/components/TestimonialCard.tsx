@@ -17,12 +17,12 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   image,
 }) => {
   return (
-    <div className="testimonial-card neon-glow p-6 h-full flex flex-col">
+    <div className="testimonial-card ember-glow-pulse p-6 h-full flex flex-col">
       <div className="flex items-center justify-between mb-4">
-        <Quote size={28} className="text-[var(--neon-purple)] opacity-60" />
+        <Quote size={28} className="text-[var(--ember-orange)] opacity-60" />
         <div className="flex space-x-1">
           {[...Array(5)].map((_, i) => (
-            <Star key={i} size={16} className="text-[var(--neon-blue)] fill-current" />
+            <Star key={i} size={16} className="text-[var(--molten-gold)] fill-current" />
           ))}
         </div>
       </div>
@@ -33,7 +33,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         <img
           src={image}
           alt={name}
-          className="w-14 h-14 rounded-full object-cover mr-4 border-2 border-[var(--glass-border)] transition-all duration-300 hover:border-[var(--neon-blue)] hover:shadow-[0_0_20px_rgba(0,212,255,0.3)]"
+          className="w-14 h-14 rounded-full object-cover mr-4 border-2 border-[var(--fireglass-border)] transition-all duration-300 hover:border-[var(--ember-orange)] hover:shadow-[0_0_20px_rgba(255,69,0,0.6)]"
         />
         <div>
           <h4 className="font-bold text-[var(--text-primary)] mb-1">
@@ -49,7 +49,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       <div 
         className="absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300 hover:opacity-100 pointer-events-none"
         style={{
-          background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%)',
+          background: 'linear-gradient(135deg, rgba(255, 69, 0, 0.1) 0%, rgba(255, 140, 0, 0.1) 100%)',
         }}
       />
     </div>

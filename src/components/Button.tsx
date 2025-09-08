@@ -24,12 +24,12 @@ const Button: React.FC<ButtonProps> = ({
   type = 'button',
   disabled = false,
 }) => {
-  const baseClasses = 'glass-button neon-glow';
+  const baseClasses = 'fireglass-button ember-glow-pulse';
   
   const variantClasses = {
-    primary: 'border-[var(--neon-blue)] text-[var(--text-primary)]',
-    secondary: 'border-[var(--neon-purple)] text-[var(--text-primary)]',
-    outline: 'border-[var(--glass-border)] text-[var(--text-primary)]',
+    primary: 'border-[var(--ember-orange)] text-[var(--text-primary)]',
+    secondary: 'border-[var(--molten-gold)] text-[var(--text-primary)]',
+    outline: 'border-[var(--fireglass-border)] text-[var(--text-primary)]',
   };
   
   const sizeClasses = {

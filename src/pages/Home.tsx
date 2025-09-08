@@ -149,10 +149,10 @@ const Home: React.FC = () => {
       <section 
         className="relative pt-20 pb-20 md:pt-28 md:pb-28"
       >
-        <div className="glass-panel mx-4 sm:mx-6 lg:mx-8 relative z-10">
+        <div className="fireglass-panel mx-4 sm:mx-6 lg:mx-8 relative z-10">
           <div className="max-w-5xl mx-auto text-center p-8 md:p-12">
             <h1 
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-8 holographic-text leading-tight"
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-8 molten-text leading-tight"
               style={{ fontFamily: 'Orbitron, monospace' }}
             >
               {titleText}
@@ -178,7 +178,7 @@ const Home: React.FC = () => {
 
       {/* Services Preview */}
       <section className="py-20 relative">
-        <div className="glass-panel mx-4 sm:mx-6 lg:mx-8">
+        <div className="fireglass-panel mx-4 sm:mx-6 lg:mx-8">
           <SectionHeading 
             title="Bespoke AI Solutions" 
             subtitle="Elevate your business with our tailored, cutting-edge AI services designed for exceptional performance and transformative impact."
@@ -212,7 +212,7 @@ const Home: React.FC = () => {
 
       {/* Testimonials */}
       <section className="py-20 relative">
-        <div className="glass-panel mx-4 sm:mx-6 lg:mx-8">
+        <div className="fireglass-panel mx-4 sm:mx-6 lg:mx-8">
           <SectionHeading 
             title="What Our Clients Say" 
             subtitle="Don't just take our word for it. Hear from visionary businesses that have transformed their operations with our cutting-edge AI solutions."
@@ -240,10 +240,10 @@ const Home: React.FC = () => {
       <section 
         className="py-20 relative overflow-hidden"
       >
-        <div className="glass-panel mx-4 sm:mx-6 lg:mx-8">
+        <div className="fireglass-panel mx-4 sm:mx-6 lg:mx-8">
           <div className="max-w-4xl mx-auto text-center relative z-10 p-8 md:p-12">
             <h2 
-              className="text-4xl font-bold mb-8 holographic-text"
+              className="text-4xl font-bold mb-8 molten-text"
               style={{ fontFamily: 'Orbitron, monospace' }}
             >
               Ready to Transform Your Business with AI?

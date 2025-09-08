@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, BrainCircuit, Home, Briefcase, FolderOpen, FileText, BookOpen, User, Phone, Zap } from 'lucide-react';
+import { Menu, X, Home, Briefcase, FolderOpen, FileText, BookOpen, User, Phone, Flame } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Header: React.FC = () => {
@@ -103,7 +103,7 @@ const Header: React.FC = () => {
       
       <motion.header
         className={`fixed w-full z-50 transition-all duration-300 ${
-          scrolled ? 'nav-glass py-3' : 'bg-transparent py-5'
+          scrolled ? 'fireglass-nav py-3' : 'bg-transparent py-5'
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -112,17 +112,17 @@ const Header: React.FC = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <motion.div className="luxury-glow">
+          <motion.div className="ember-glow-pulse">
             <Link to="/" className="flex items-center" onClick={closeMenu}>
               <div className="flex items-center space-x-1 group">
                 <motion.div
                   whileHover={{ rotate: 5, scale: 1.05 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Zap size={28} className="text-[var(--neon-blue)] drop-shadow-[0_0_15px_rgba(0,240,255,0.6)]" />
+                  <Flame size={28} className="text-[var(--ember-orange)] drop-shadow-[0_0_15px_rgba(255,69,0,0.8)]" />
                 </motion.div>
                 <motion.span 
-                  className="text-xl font-bold holographic-text whitespace-nowrap"
+                  className="text-xl font-bold molten-text whitespace-nowrap"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.2 }}
                 >
@@ -145,10 +145,10 @@ const Header: React.FC = () => {
               >
                 <Link
                   to={link.path}
-                  className={`glass-button text-sm font-medium luxury-glow ${
+                  className={`fireglass-button text-sm font-medium ember-glow-pulse ${
                     location.pathname === link.path
-                      ? 'border-[var(--neon-blue)] text-[var(--neon-blue)] shadow-[0_0_25px_rgba(0,240,255,0.3)]'
-                      : 'hover:border-[var(--neon-blue)] hover:text-[var(--neon-blue)]'
+                      ? 'border-[var(--molten-gold)] text-[var(--molten-gold)] shadow-[0_0_25px_rgba(255,215,0,0.6)]'
+                      : 'hover:border-[var(--molten-gold)] hover:text-[var(--ember-orange)]'
                   }`}
                   aria-current={location.pathname === link.path ? 'page' : undefined}
                 >
@@ -160,7 +160,7 @@ const Header: React.FC = () => {
             {/* Sitemap Toggle Button */}
             <motion.button
               onClick={toggleSitemap}
-              className="glass-button luxury-glow p-3"
+              className="fireglass-button ember-glow-pulse p-3"
               aria-label="Toggle sitemap"
               aria-expanded={showSitemap}
               whileHover={{ scale: 1.05 }}
@@ -181,7 +181,7 @@ const Header: React.FC = () => {
           >
             <motion.button
               onClick={toggleMenu}
-              className="glass-button luxury-glow p-3"
+              className="fireglass-button ember-glow-pulse p-3"
               aria-label="Toggle menu"
               aria-expanded={isOpen}
               whileHover={{ scale: 1.1 }}
@@ -197,7 +197,7 @@ const Header: React.FC = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div 
-            className="md:hidden glass-panel absolute top-full left-0 right-0 m-4 overflow-hidden"
+            className="md:hidden fireglass-panel absolute top-full left-0 right-0 m-4 overflow-hidden"
             variants={mobileMenuVariants}
             initial="hidden"
             animate="visible"
@@ -215,10 +215,10 @@ const Header: React.FC = () => {
                 >
                   <Link
                     to={link.path}
-                    className={`glass-button w-full justify-start luxury-glow ${
+                    className={`fireglass-button w-full justify-start ember-glow-pulse ${
                       location.pathname === link.path
-                        ? 'border-[var(--neon-blue)] text-[var(--neon-blue)]'
-                        : 'hover:border-[var(--neon-blue)] hover:text-[var(--neon-blue)]'
+                        ? 'border-[var(--molten-gold)] text-[var(--molten-gold)]'
+                        : 'hover:border-[var(--molten-gold)] hover:text-[var(--ember-orange)]'
                     }`}
                     onClick={closeMenu}
                     aria-current={location.pathname === link.path ? 'page' : undefined}
@@ -239,7 +239,7 @@ const Header: React.FC = () => {
       <AnimatePresence>
         {showSitemap && (
           <motion.div 
-            className="hidden md:block fixed top-20 right-4 glass-panel z-40 min-w-[250px]"
+            className="hidden md:block fixed top-20 right-4 fireglass-panel z-40 min-w-[250px]"
             initial={{ opacity: 0, y: -10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
@@ -248,16 +248,16 @@ const Header: React.FC = () => {
             aria-label="Site map"
           >
             <div className="p-4">
-              <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-3 holographic">Site Map</h3>
+              <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-3 molten-text">Site Map</h3>
               <div className="space-y-2">
                 {navLinks.map((link) => (
                   <Link
                     key={link.name}
                     to={link.path}
-                    className={`glass-button text-sm w-full justify-start luxury-glow ${
+                    className={`fireglass-button text-sm w-full justify-start ember-glow-pulse ${
                       location.pathname === link.path
-                        ? 'border-[var(--neon-blue)] text-[var(--neon-blue)]'
-                        : 'hover:border-[var(--neon-blue)] hover:text-[var(--neon-blue)]'
+                        ? 'border-[var(--molten-gold)] text-[var(--molten-gold)]'
+                        : 'hover:border-[var(--molten-gold)] hover:text-[var(--ember-orange)]'
                     }`}
                     onClick={closeMenu}
                     aria-current={location.pathname === link.path ? 'page' : undefined}
