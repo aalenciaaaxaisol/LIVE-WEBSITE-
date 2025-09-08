@@ -12,21 +12,21 @@ interface ServiceCardProps {
 const ServiceCard: React.FC<ServiceCardProps> = ({ icon: Icon, title, description, details }) => {
   return (
     <div 
-      className="service-card floating-elegant ember-glow-pulse group h-full"
+      className="service-card floating-elegant neon-glow group h-full"
     >
       <div className="relative z-10 h-full flex flex-col">
         <div 
           className="mb-6 p-4 inline-block rounded-xl transition-all duration-300 group-hover:scale-105"
           style={{
-            background: 'var(--fireglass-bg)',
-            border: '2px solid var(--fireglass-border)',
-            boxShadow: '0 0 20px rgba(255, 69, 0, 0.6)',
+            background: 'var(--glass-bg)',
+            border: '1px solid var(--glass-border)',
+            boxShadow: '0 0 20px rgba(6, 182, 212, 0.3)',
           }}
         >
-          <Icon size={32} className="text-[var(--ember-orange)]" />
+          <Icon size={32} className="text-[var(--neon-blue)]" />
         </div>
         
-        <h3 className="text-xl font-bold mb-4 molten-text">{title}</h3>
+        <h3 className="text-xl font-bold mb-4 holographic-text">{title}</h3>
         <p className="text-[var(--text-secondary)] mb-6 flex-grow">{description}</p>
         
         <div 
@@ -44,7 +44,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon: Icon, title, descriptio
       <div 
         className="absolute -right-8 -bottom-8 w-32 h-32 rounded-full opacity-10 transition-all duration-500 group-hover:scale-110 group-hover:opacity-20"
         style={{
-          background: 'radial-gradient(circle, var(--ember-orange) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, var(--neon-blue) 0%, transparent 70%)',
           filter: 'blur(20px)',
         }}
       />
